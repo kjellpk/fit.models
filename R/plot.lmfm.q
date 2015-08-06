@@ -11,7 +11,10 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
     "Overlaid Normal QQ Plot of Modified Residuals", 
     "Overlaid Kernel Density Estimate of Modified Residuals")
 
-  if(length(attr(x[[1]]$terms, "term.labels")) == 1)
+  is.simple.reg <- function(m)
+    all(attr(m$terms, "dataClasses") == "numeric") && dim(model.frame(m))[2] == 2
+
+  if(all(sapply(x, is.simple.reg)))
     choices <- c(choices, "Scatter Plot with Overlaid Fit(s)")
 
   all.plots <- 2:length(choices)
