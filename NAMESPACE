@@ -27,7 +27,7 @@ export(
   plot.glmfm
 )
 
- ## S3 methods for fit.models ##
+ ## S3 methods for lmfm ##
 
 S3method(coef, lmfm)
 S3method(plot, lmfm)
@@ -36,6 +36,12 @@ S3method(summary, lmfm)
 
 S3method(print, summary.lmfm)
 
+S3method(rmodified, default)
+S3method(leverage, default)
+S3method(leverage, lm)
+
+
+ ## S3 methods for lmfm ##
 
 S3method(coef, glmfm)
 S3method(plot, glmfm)

@@ -1,8 +1,8 @@
 Package: fit.models
 Version: 0.5-12
-Date: 2015-07-29
-Title: fit.models
-Description: A framework for comparing fitted models
+Date: 2015-08-06
+Title: Fit Dot Models
+Description: A framework for comparing fitted models.
 Author: Kjell Konis <kjell.konis@me.com>.
 Maintainer: Kjell Konis <kjell.konis@me.com>
 Depends: lattice
