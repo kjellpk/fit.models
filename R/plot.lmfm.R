@@ -1,0 +1,205 @@
+#' Comparison Diagnostic Plots for Linear Regression Models
+#' 
+#' Produces a set of comparison diagnostic plots.  The plot options are
+#' 
+#' \describe{ \item{(2)}{Normal QQ Plot of Modified Residuals,}
+#' \item{(3)}{Kernel Density Estimate of Modified Residuals,}
+#' \item{(4)}{Modified Residuals vs. Leverage,} \item{(5)}{Modified Residuals
+#' vs. Fitted Values,} \item{(6)}{Scale-Location,} \item{(7)}{Response vs.
+#' Fitted Values,} \item{(8)}{Modified Residuals vs. Index (Time),}
+#' \item{(9)}{Overlaid Normal QQ Plot of Modified Residuals,}
+#' \item{(10)}{Overlaid Kernel Density Estimate of Modified Residuals,}
+#' \item{(11)}{Scatter Plot with Overlaid Fits (for simple linear regression
+#' models).} }
+#' 
+#' The \emph{modified residuals} are defined to be
+#' 
+#' \deqn{r_{i} = \frac{e_{i}}{\sqrt{1 - h_{i}}}}
+#' 
+#' where \eqn{h_{i} = H_{ii}} is the \eqn{i^{th}} diagonal element of the hat
+#' matrix.  The modified residuals are identically distributed with variance
+#' \eqn{\sigma^{2}}.  The modified residuals are used instead of the
+#' standardized residuals (which are identically distributed with variance 1)
+#' so that the comparison plots emphasize differences in the variance
+#' estimates.
+#' 
+#' @param x an \code{lmfm} object.
+#' @param which.plots either \code{"ask"}, \code{"all"}, or a vector of integer
+#' values specifying which plots to draw.  In the latter case, use the plot
+#' numbers given in the description above (or in the "ask" menu).  Any other
+#' values will be silently ignored.
+#' @param \dots other parameters to be passed through to plotting functions.
+#' @return \code{x} is invisibly returned.
+#' @section Side Effects: The selected plots are drawn on a graphics device.
+#' @seealso See \code{\link{qqPlot.lmfm}} for (2),
+#' \code{\link{kernDenPlot.lmfm}} for (3), \code{\link{indexPlot.lmfm}} for
+#' (8), \code{\link{overlaidQQPlot.lmfm}} for (9),
+#' \code{\link{overlaidKernDenPlot.lmfm}} for (10),
+#' \code{\link{simpleRegPlot.lmfm}} for (11), and
+#' \code{\link{scatterPlot.lmfm}} for the others.  See \code{\link{rmodified}}
+#' for modified residuals.
+#' @keywords hplot methods
+#' @examples
+#' 
+#' data(stackloss)
+#' stack.lm <- lm(stack.loss ~ ., data = stackloss)
+#' stack.clean <- lm(stack.loss ~ ., data = stackloss, subset = 5:20)
+#' fm <- fit.models(stack.clean, stack.lm)
+#' plot(fm)
+#' 
+plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
+{
+  choices <- c("All",
+    "Normal QQ Plot of Modified Residuals", 
+    "Kernel Density Estimate of Modified Residuals",
+    "Modified Residuals vs. Leverage",
+    "Modified Residuals vs. Fitted Values", 
+    "Scale-Location", 
+    "Response vs. Fitted Values", 
+    "Modified Residuals vs. Index (Time)", 
+    "Overlaid Normal QQ Plot of Modified Residuals", 
+    "Overlaid Kernel Density Estimate of Modified Residuals")
+
+  is.simple.reg <- function(m)
+    all(attr(m$terms, "dataClasses") == "numeric") && dim(model.frame(m))[2] == 2
+
+  if(all(sapply(x, is.simple.reg)))
+    choices <- c(choices, "Scatter Plot with Overlaid Fit(s)")
+
+  all.plots <- 2:length(choices)
+
+  tmenu <- paste("plot:", choices)
+
+  if(is.numeric(which.plots)) {
+    if(!all(which.plots %in% all.plots))
+      stop(sQuote("which"), " must be in 2:", length(choices))
+
+    if(length(which.plots) == 0)
+      return(invisible(x))
+
+    if(length(which.plots) > 1) {
+      par.ask <- par(ask = TRUE)
+      on.exit(par(ask = par.ask))
+    }
+
+    ask <- FALSE
+    which.plots <- c(which.plots + 1, 1)
+  }
+
+  else if(which.plots == "all") {
+    which.plots <- c(all.plots + 1, 1)
+    ask <- FALSE
+    par.ask <- par(ask = TRUE)
+    on.exit(par(ask = par.ask))
+  }
+
+  else
+    ask <- TRUE
+
+  n.models <- length(x)
+  if(n.models <= 3)
+    colors <- c("black", "blue", "purple")[1:n.models]
+  else
+    colors <- 1:n.models
+
+  repeat {
+    if(ask) {
+      which.plots <- menu(tmenu,
+        title = "\nMake plot selections (or 0 to exit):\n")
+
+      if(any(which.plots == 1)) {
+        which.plots <- c(all.plots, 0)
+        par.ask <- par(ask = TRUE)
+        on.exit(par(ask = par.ask))
+      }
+
+      which.plots <- which.plots + 1
+    }
+
+    for(pick in which.plots) {
+      switch(pick,
+        return(invisible(x)),
+
+        place.holder <- 1,
+
+        qqPlot.lmfm(x,
+                    fun = rmodified,
+                    main = expression(plain("Normal QQ Plot of Modified Residuals")),
+                    xlab = expression(plain("Standard Normal Quantiles")),
+                    ylab = expression(plain("Empirical Quantiles of Modified Residuals")),
+                    pch = 16),
+
+        kernDenPlot.lmfm(x,
+                         fun = rmodified,
+                         main = expression(plain("Kernel Density Estimate of Modified Residuals")),
+                         xlab = expression(plain("Modified Residuals")),
+                         ylab = expression(plain("Density"))),
+
+        scatterPlot.lmfm(x,
+                         x.fun = leverage,
+                         y.fun = rmodified,
+                         xlab = expression(plain("Leverage")),
+                         ylab = expression(plain("Modified Residuals")),
+                         main = expression(plain("Modified Residuals vs. Leverage")),
+                         pch = 16),
+
+        scatterPlot.lmfm(x,
+                         x.fun = fitted,
+                         y.fun = residuals,
+                         main = expression(plain("Residuals vs. Fitted Values")),
+                         xlab = expression(plain("Fitted Values")),
+                         ylab = expression(plain("Residuals")),
+                         pch = 16),
+
+        scatterPlot.lmfm(x,
+                         x.fun = fitted,
+                         y.fun = function(u) sqrt(abs(rmodified(u))),
+                         main = expression(plain("Scale-Location")),
+                         xlab = expression(plain("Fitted Values")),
+                         ylab = expression(sqrt(abs(plain("Modified Residuals")))),
+                         pch = 16),
+
+        scatterPlot.lmfm(x,
+                         x.fun = fitted,
+                         y.fun = function(u) model.response(model.frame(u)),
+                         main = expression(plain("Response vs. Fitted Values")),
+                         xlab = expression(plain("Fitted Values")),
+                         ylab = expression(plain("Response")),
+                         pch = 16),
+
+        indexPlot.lmfm(x,
+                       fun = rmodified,
+                       main = expression(plain("Modified Residuals vs. Index (Time)")),
+                       xlab = expression(plain("Index (Time)")),
+                       ylab = expression(plain("Modified Residuals")),
+                       pch = 16),
+
+        overlaidQQPlot.lmfm(x,
+                            fun = rmodified,
+                            main = expression(plain("Normal QQ Plot of Modified Residuals")),
+                            xlab = expression(plain("Standard Normal Quantiles")),
+                            ylab = expression(plain("Empirical Quantiles of Modified Residuals")),
+                            pch = 16),
+
+        overlaidKernDenPlot.lmfm(x,
+                                 fun = rmodified,
+                                 main = expression(plain("Kernel Density Estimate of Modified Residuals")),
+                                 xlab = expression(plain("Modified Residuals")),
+                                 ylab = expression(plain("Density"))),
+
+        simpleRegPlot.lmfm(x,
+                           main = expression(plain("Scatter Plot with Overlaid Fits")),
+                           lwd.reg = n.models:1,
+                           col.reg = colors,
+                           pch = 16)
+      )
+    }
+  }
+
+  invisible(x)
+}
+
+
+
+
+
