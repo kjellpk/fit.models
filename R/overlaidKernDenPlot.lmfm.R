@@ -11,7 +11,7 @@
 #' @keywords hplot
 
 
-#' @importFrom lattice densityplot
+#' @importFrom lattice densityplot strip.default
 
 
 #' @export overlaidKernDenPlot.lmfm

@@ -28,6 +28,7 @@
 #' summary(fm)
 
 
+#' @S3method summary glmfm
 #' @export summary.glmfm
 summary.glmfm <- function(object, correlation = FALSE, ...)
 {

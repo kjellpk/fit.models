@@ -11,7 +11,7 @@
 #' @keywords hplot
 
 
-#' @importFrom lattice xyplot panel.xyplot
+#' @importFrom lattice xyplot panel.xyplot strip.default
 
 
 #' @export scatterPlot.lmfm

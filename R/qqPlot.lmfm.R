@@ -24,7 +24,7 @@
 #' @keywords hplot
 
 
-#' @importFrom lattice xyplot panel.xyplot panel.abline llines
+#' @importFrom lattice xyplot panel.xyplot panel.abline llines strip.default
 #' @importFrom stats rnorm quantile qnorm qqnorm
 
 

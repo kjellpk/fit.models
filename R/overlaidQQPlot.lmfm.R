@@ -11,7 +11,7 @@
 #' @keywords hplot
 
 
-#' @importFrom lattice qqmath
+#' @importFrom lattice qqmath strip.default
 
 
 #' @export overlaidQQPlot.lmfm

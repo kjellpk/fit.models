@@ -15,7 +15,7 @@
 #' @keywords hplot
 
 
-#' @importFrom lattice xyplot panel.xyplot panel.text panel.abline
+#' @importFrom lattice xyplot panel.xyplot panel.text panel.abline strip.default
 
 
 #' @export indexPlot.lmfm

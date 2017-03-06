@@ -1,4 +1,5 @@
 #' @importFrom stats coef
+#' @S3method coef lmfm
 
 coef.lmfm <- function(object, ...)
 {

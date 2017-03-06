@@ -1,6 +1,6 @@
 #' @importFrom stats coef printCoefmat
 
-#' @S3method print.summary lmfm
+#' @S3method print summary.lmfm
 print.summary.lmfm <- function(x, digits = max(3, getOption("digits") - 3),
                                signif.stars = getOption("show.signif.stars"),
                                ...)

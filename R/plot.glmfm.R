@@ -40,8 +40,10 @@
 
 
 #' @importFrom stats predict residuals fitted model.response model.frame
+#' @importFrom graphics par
+#' @importFrom utils menu
 
-
+#' @S3method plot glmfm
 #' @export plot.glmfm
 plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 {

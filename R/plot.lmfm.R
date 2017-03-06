@@ -50,8 +50,11 @@
 
 
 #' @importFrom stats residuals fitted model.response model.frame
+#' @importFrom graphics par
+#' @importFrom utils menu
 
 
+#' @S3method plot lmfm
 #' @export plot.lmfm
 plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
 {

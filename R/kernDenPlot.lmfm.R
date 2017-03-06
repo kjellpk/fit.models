@@ -11,7 +11,7 @@
 #' @keywords hplot
 
 
-#' @importFrom lattice densityplot panel.densityplot panel.abline
+#' @importFrom lattice densityplot panel.densityplot panel.abline strip.default
 
 
 #' @export kernDenPlot.lmfm
