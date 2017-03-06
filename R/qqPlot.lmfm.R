@@ -1,6 +1,6 @@
 #' Compaison QQ Plot
 #' 
-#' Produces side-by-side QQ plots.  Aa optional simulated confidence envelope
+#' Produces side-by-side QQ plots.  An optional simulated confidence envelope
 #' can be included in each plot.
 #' 
 #' 
@@ -22,6 +22,13 @@
 #' \code{\link[lattice]{xyplot}}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice xyplot panel.xyplot panel.abline llines
+#' @importFrom stats rnorm quantile qnorm qqnorm
+
+
+#' @export qqPlot.lmfm
 qqPlot.lmfm <- function(x, fun, envelope = TRUE, half.normal = FALSE,
                         n.samples = 250, level = .95, id.n = 3, qqline = TRUE,
                         ...)

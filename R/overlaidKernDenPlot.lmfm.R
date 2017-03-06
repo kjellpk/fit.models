@@ -9,6 +9,12 @@
 #' \code{\link[lattice]{densityplot}}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice densityplot
+
+
+#' @export overlaidKernDenPlot.lmfm
 overlaidKernDenPlot.lmfm <- function(x, fun, ...)
 {
   n.models <- length(x)

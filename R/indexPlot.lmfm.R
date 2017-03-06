@@ -13,6 +13,12 @@
 #' \code{\link[lattice]{xyplot}}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice xyplot panel.xyplot panel.text panel.abline
+
+
+#' @export indexPlot.lmfm
 indexPlot.lmfm <- function(x, fun, level = 0.95, id.n = 3, ...)
 {
   n.models <- length(x)

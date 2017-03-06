@@ -9,6 +9,12 @@
 #' \code{\link[lattice]{qqmath}}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice qqmath
+
+
+#' @export overlaidQQPlot.lmfm
 overlaidQQPlot.lmfm <- function(x, fun, ...)
 {
   n.models <- length(x)

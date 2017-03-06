@@ -9,6 +9,12 @@
 #' \code{\link[lattice]{xyplot}}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice densityplot panel.densityplot panel.abline
+
+
+#' @export kernDenPlot.lmfm
 kernDenPlot.lmfm <- function(x, fun, ...)
 {
   n.models <- length(x)

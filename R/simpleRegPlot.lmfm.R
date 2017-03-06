@@ -14,6 +14,13 @@
 #' \code{\link[lattice]{xyplot}}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice xyplot panel.xyplot panel.abline simpleKey
+#' @importFrom stats as.formula formula
+
+
+#' @export simpleRegPlot.lmfm
 simpleRegPlot.lmfm <- function(x, lwd.reg, col.reg, ...) 
 {
   n.models <- length(x)

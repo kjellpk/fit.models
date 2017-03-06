@@ -30,7 +30,6 @@ m2 <- lm(stack.loss ~ . - Acid.Conc., data = stackloss)
 
 fm <- fit.models(m1, m2)
 print(fm.sum <- summary(fm))
-
 }
 \keyword{methods}
 \keyword{regression}

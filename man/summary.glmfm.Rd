@@ -37,7 +37,6 @@ lot2 <- glm(lot2 ~ log(u), data = clotting, family = Gamma)
 
 fm <- fit.models(lot1, lot2)
 summary(fm)
-
 }
 \keyword{methods}
 \keyword{regression}

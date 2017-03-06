@@ -1,3 +1,4 @@
+#' @S3method print lmfm
 print.lmfm <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
   n.models <- length(x)

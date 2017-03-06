@@ -9,6 +9,12 @@
 #' @param \dots additional arguments.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
+
+
+#' @importFrom lattice xyplot panel.xyplot
+
+
+#' @export scatterPlot.lmfm
 scatterPlot.lmfm <- function(object, x.fun, y.fun, ...)
 {
   n.models <- length(object)

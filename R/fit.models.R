@@ -74,8 +74,9 @@
 #'                     stack.loss ~ ., data = stackloss)
 #' 
 #'   fm4 <- fit.models(Clean = lm.clean, Complete = lm.complete)
-#' 
-#' @export
+
+
+#' @export fit.models
 fit.models <- function(model.list, ...)
 {
   fm.call <- match.call()

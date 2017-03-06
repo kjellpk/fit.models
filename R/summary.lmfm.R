@@ -19,7 +19,9 @@
 #' 
 #' fm <- fit.models(m1, m2)
 #' print(fm.sum <- summary(fm))
-#' 
+
+
+#' @export summary.lmfm
 summary.lmfm <- function(object, correlation = FALSE, ...)
 {
   object <- lapply(object, summary, correlation = correlation, ...)

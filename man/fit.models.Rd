@@ -83,7 +83,6 @@ the most appropriate fit.models class.
                     stack.loss ~ ., data = stackloss)
 
   fm4 <- fit.models(Clean = lm.clean, Complete = lm.complete)
-
 }
 \seealso{
 \code{\link{fmclass.add.class}} for adding a class to an existing

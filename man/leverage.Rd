@@ -4,9 +4,15 @@
 \alias{leverage}
 \alias{leverage.default}
 \alias{leverage.lm}
+\alias{leverage.default}
+\alias{leverage.lm}
 \title{Leverage}
 \usage{
 leverage(object, ...)
+
+\method{leverage}{default}(object, ...)
+
+\method{leverage}{lm}(object, ...)
 }
 \arguments{
 \item{object}{a fitted model object.}
@@ -17,7 +23,7 @@ leverage(object, ...)
 a numeric vector containing the leverages.
 }
 \description{
-Returns a leverage measure for each sample point in the data.
+Compute a leverage measure for each sample point in the data.
 }
 \details{
 For least-squares linear models the leverages are the diagonal elements of
@@ -34,7 +40,6 @@ weight <- c(ctl, trt)
 lm.D9 <- lm(weight ~ group)
 
 leverage(lm.D9)
-
 }
 \keyword{methods}
 \keyword{regression}

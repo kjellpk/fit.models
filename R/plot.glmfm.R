@@ -1,12 +1,14 @@
 #' Comparison Diagnostic Plots for Generalized Linear Models
 #' 
 #' Produces a set of comparison diagnostic plots.  The plot options are
-#' \describe{ \item{(2)}{Deviance Residuals vs. Predicted Values,}
-#' \item{(3)}{Response vs. Fitted Values,} \item{(4)}{Normal QQ Plot of
-#' Modified Pearson Residuals,} \item{(5)}{Normal QQ Plot of Modified Deviance
-#' Residuals,} \item{(6)}{Modified Pearson Residuals vs. Leverage,}
-#' \item{(7)}{Scale-Location.} }
-#' 
+#' \describe{
+#'   \item{(2)}{Deviance Residuals vs. Predicted Values,}
+#'   \item{(3)}{Response vs. Fitted Values,}
+#'    \item{(4)}{Normal QQ Plot of Pearson Residuals,}
+#'    \item{(5)}{Normal QQ Plot of Deviance Residuals,}
+#'    \item{(6)}{Pearson Residuals vs. Leverage,}
+#'    \item{(7)}{Scale-Location.}
+#' }
 #' 
 #' @param x a \code{glmfm} object.
 #' @param which.plots either \code{"ask"}, \code{"all"}, or a vector of integer
@@ -35,6 +37,12 @@
 #' fm <- fit.models(lot1, lot2)
 #' plot(fm)
 #' 
+
+
+#' @importFrom stats predict residuals fitted model.response model.frame
+
+
+#' @export plot.glmfm
 plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 {
   n.models <- length(x)
@@ -42,8 +50,8 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
   choices <- c("All",
                "Deviance Residuals vs. Predicted Values",
                "Response vs. Fitted Values",
-               "Normal QQ Plot of Modified Pearson Residuals",
-               "Normal QQ Plot of Modified Deviance Residuals",
+               "Normal QQ Plot of Pearson Residuals",
+               "Normal QQ Plot of Deviance Residuals",
                "Pearson Residuals vs. Leverage",
                "Scale-Location")
 
@@ -114,34 +122,34 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                          pch = 16),
 
         qqPlot.lmfm(x,
-                    fun = function(u) rmodified(u, type = "pearson"),
+                    fun = function(u) residuals(u, type = "pearson"),
                     xlab = expression(plain("Standard Normal Quantiles")),
-                    ylab = expression(plain("Empirical Quantiles of Modified Pearson Residuals")),
-                    main = expression(plain("Normal QQ Plot of Modified Pearson Residuals")),
+                    ylab = expression(plain("Empirical Quantiles of Pearson Residuals")),
+                    main = expression(plain("Normal QQ Plot of Pearson Residuals")),
                     envelope = FALSE,
                     pch = 16),
 
         qqPlot.lmfm(x,
-                    fun = function(u) rmodified(u, type = "deviance"),
+                    fun = function(u) residuals(u, type = "deviance"),
                     xlab = expression(plain("Standard Normal Quantiles")),
-                    ylab = expression(plain("Empirical Quantiles of Modified Deviance Residuals")),
-                    main = expression(plain("Normal QQ Plot of Modified Deviance Residuals")),
+                    ylab = expression(plain("Empirical Quantiles of Deviance Residuals")),
+                    main = expression(plain("Normal QQ Plot of Deviance Residuals")),
                     envelope = FALSE,
                     pch = 16),
 
         scatterPlot.lmfm(x,
                          x.fun = leverage,
-                         y.fun = function(v) rmodified(v, type = "pearson"),
+                         y.fun = function(v) residuals(v, type = "pearson"),
                          xlab = expression(plain("Leverage")),
-                         ylab = expression(plain("Modified Pearson Residuals")),
-                         main = expression(plain("Modified Pearson Residuals vs. Leverage")),
+                         ylab = expression(plain("Pearson Residuals")),
+                         main = expression(plain("Pearson Residuals vs. Leverage")),
                          pch = 16),
 
         scatterPlot.lmfm(x,
                          x.fun = predict,
-                         y.fun = function(u) sqrt(abs(rmodified(u, type = "deviance"))),
+                         y.fun = function(u) sqrt(abs(residuals(u, type = "deviance"))),
                          xlab = expression(plain("Predicted Values")),
-                         ylab = expression(sqrt(abs(plain("Modified Deviance Residuals")))),
+                         ylab = expression(sqrt(abs(plain("Deviance Residuals")))),
                          main = expression(plain("Scale-Location")),
                          pch = 16)
       )

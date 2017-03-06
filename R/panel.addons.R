@@ -1,3 +1,5 @@
+#' @importFrom lattice panel.loess panel.rug panel.text
+
 panel.addons <- function(x, y, smooths = FALSE, rugplot = FALSE, id.n = 3)
 {
   if(smooths)

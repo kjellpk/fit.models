@@ -1,6 +1,6 @@
 #' Leverage
 #' 
-#' Returns a leverage measure for each sample point in the data.
+#' Compute a leverage measure for each sample point in the data.
 #' 
 #' For least-squares linear models the leverages are the diagonal elements of
 #' the hat matrix.  This function is generic.  The default method assigns a
@@ -21,11 +21,20 @@
 #' lm.D9 <- lm(weight ~ group)
 #' 
 #' leverage(lm.D9)
-#' 
+
+
+#' @importFrom stats lm.influence
+
+
+#' @rdname leverage
+#' @export leverage
 leverage <- function(object, ...)
   UseMethod("leverage")
 
 
+#' @rdname leverage
+#' @method leverage default
+#' @S3method leverage default
 leverage.default <- function(object, ...)
 {
   p <- length(coef(object))
@@ -34,6 +43,9 @@ leverage.default <- function(object, ...)
 }
 
 
+#' @rdname leverage
+#' @method leverage lm
+#' @S3method leverage lm
 leverage.lm <- function(object, ...)
   lm.influence(object, do.coef = FALSE)$hat
 

@@ -37,7 +37,7 @@ plot.}
 the \code{trellis} object is invisibly returned.
 }
 \description{
-Produces side-by-side QQ plots.  Aa optional simulated confidence envelope
+Produces side-by-side QQ plots.  An optional simulated confidence envelope
 can be included in each plot.
 }
 \keyword{hplot}

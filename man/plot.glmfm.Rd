@@ -21,11 +21,14 @@ values will be silently ignored.}
 }
 \description{
 Produces a set of comparison diagnostic plots.  The plot options are
-\describe{ \item{(2)}{Deviance Residuals vs. Predicted Values,}
-\item{(3)}{Response vs. Fitted Values,} \item{(4)}{Normal QQ Plot of
-Modified Pearson Residuals,} \item{(5)}{Normal QQ Plot of Modified Deviance
-Residuals,} \item{(6)}{Modified Pearson Residuals vs. Leverage,}
-\item{(7)}{Scale-Location.} }
+\describe{
+  \item{(2)}{Deviance Residuals vs. Predicted Values,}
+  \item{(3)}{Response vs. Fitted Values,}
+   \item{(4)}{Normal QQ Plot of Pearson Residuals,}
+   \item{(5)}{Normal QQ Plot of Deviance Residuals,}
+   \item{(6)}{Pearson Residuals vs. Leverage,}
+   \item{(7)}{Scale-Location.}
+}
 }
 \section{Side Effects}{
  The selected plots are drawn on a graphics device.

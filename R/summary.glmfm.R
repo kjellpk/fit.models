@@ -26,7 +26,9 @@
 #' 
 #' fm <- fit.models(lot1, lot2)
 #' summary(fm)
-#' 
+
+
+#' @export summary.glmfm
 summary.glmfm <- function(object, correlation = FALSE, ...)
 {
   object <- lapply(object, summary, correlation = correlation, ...)
