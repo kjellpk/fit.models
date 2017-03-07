@@ -5,7 +5,7 @@
 #' \describe{
 #'   \item{(2)}{Normal QQ Plot of Residuals,}
 #'   \item{(3)}{Kernel Density Estimate of Residuals,}
-#'   \item{(4)}{Residuals vs. Distance,}
+#'   \item{(4)}{Residuals vs. Mahalanobis Distance,}
 #'   \item{(5)}{Residuals vs. Fitted Values,}
 #'   \item{(6)}{Scale-Location,}
 #'   \item{(7)}{Response vs. Fitted Values,}
@@ -20,7 +20,7 @@
 #' values specifying which plots to draw.  In the latter case, use the plot
 #' numbers given in the description above (or in the "ask" menu).  Any other
 #' values will be silently ignored.
-#' @param \dots any additional parameters are ignored.
+#' @param \dots additional parameters are ignored.
 #' @return \code{x} is invisibly returned.
 #' @section Side Effects: The selected plots are drawn on a graphics device.
 #' @seealso See \code{\link{qqPlot.lmfm}} for (2),
@@ -64,7 +64,7 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
   choices <- c("All",
     "Normal QQ Plot of Residuals", 
     "Kernel Density Estimate of Residuals",
-    "Residuals vs. Leverage",
+    "Residuals vs. Mahalanobis Distance",
     "Residuals vs. Fitted Values", 
     "Scale-Location", 
     "Response vs. Fitted Values", 
@@ -148,7 +148,7 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
                          ylab = expression(plain("Density"))),
 
         scatterPlot.lmfm(x,
-                         x.fun = MD,
+                         x.fun = function(u) sqrt(mahalanobis(u)),
                          y.fun = residuals,
                          xlab = expression(plain("Mahalanobis Distance")),
                          ylab = expression(plain("Residuals")),

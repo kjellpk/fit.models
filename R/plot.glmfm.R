@@ -141,7 +141,7 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                     pch = 16),
 
         scatterPlot.lmfm(x,
-                         x.fun = MD,
+                         x.fun = function(u) sqrt(mahalanobis(u)),
                          y.fun = function(v) residuals(v, type = "pearson"),
                          xlab = expression(plain("Mahalanobis Distance")),
                          ylab = expression(plain("Pearson Residuals")),

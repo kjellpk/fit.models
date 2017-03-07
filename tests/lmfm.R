@@ -29,7 +29,7 @@ plot(fm1, 10)
 dev.off()
 
 rm(fm1, fm1.sum)
-unlink("fm1.pdf")
+file.remove("fm1.pdf")
 
 
 ################################################################################
@@ -55,7 +55,7 @@ plot(fm2, 10)
 dev.off()
 
 rm(fm2, fm2.sum)
-unlink("fm2.pdf")
+file.remove("fm2.pdf")
 
 
 ################################################################################
@@ -81,7 +81,7 @@ plot(fm3, 10)
 dev.off()
 
 rm(fm3, fm3.sum)
-unlink("fm3.pdf")
+file.remove("fm3.pdf")
 
 
 ################################################################################
@@ -107,7 +107,7 @@ plot(fm4, 10)
 dev.off()
 
 rm(fm4, fm4.sum)
-unlink("fm4.pdf")
+file.remove("fm4.pdf")
 
 
 ################################################################################
@@ -121,7 +121,7 @@ print(fm5.sum <- summary(fm5, correlation = TRUE))
 pdf("fm5.pdf")
 plot(fm5, 2)
 plot(fm5, 3)
-#plot(fm5, 4) #can add this back in after adding MD.rlm
+plot(fm5, 4)
 plot(fm5, 5)
 plot(fm5, 6)
 plot(fm5, 7)
@@ -132,7 +132,7 @@ plot(fm5, 11)
 dev.off()
 
 rm(fm5, fm5.sum)
-unlink("fm5.pdf")
+file.remove("fm5.pdf")
 
 
 ################################################################################

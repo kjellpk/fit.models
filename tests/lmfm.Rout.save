@@ -20,6 +20,13 @@ Type 'q()' to quit R.
 > data(stackloss)
 > 
 > library(fit.models)
+
+Attaching package: 'fit.models'
+
+The following object is masked from 'package:stats':
+
+    mahalanobis
+
 > library(MASS)
 > 
 > # add rlm to the lmfm fit.models class
@@ -104,7 +111,8 @@ null device
           1 
 > 
 > rm(fm1, fm1.sum)
-> unlink("fm1.pdf")
+> file.remove("fm1.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -191,7 +199,8 @@ null device
           1 
 > 
 > rm(fm2, fm2.sum)
-> unlink("fm2.pdf")
+> file.remove("fm2.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -274,7 +283,8 @@ null device
           1 
 > 
 > rm(fm3, fm3.sum)
-> unlink("fm3.pdf")
+> file.remove("fm3.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -359,7 +369,8 @@ null device
           1 
 > 
 > rm(fm4, fm4.sum)
-> unlink("fm4.pdf")
+> file.remove("fm4.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -419,7 +430,7 @@ Acid.Conc. -1.00
 > pdf("fm5.pdf")
 > plot(fm5, 2)
 > plot(fm5, 3)
-> #plot(fm5, 4) #can add this back in after adding MD.rlm
+> plot(fm5, 4)
 > plot(fm5, 5)
 > plot(fm5, 6)
 > plot(fm5, 7)
@@ -432,7 +443,8 @@ null device
           1 
 > 
 > rm(fm5, fm5.sum)
-> unlink("fm5.pdf")
+> file.remove("fm5.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -441,4 +453,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  2.708   0.071   2.787 
+  2.773   0.072   2.855 

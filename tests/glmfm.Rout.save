@@ -1,7 +1,7 @@
 
-R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin14.1.0 (64-bit)
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin16.3.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -18,9 +18,14 @@ Type 'q()' to quit R.
 > options(warn = 2)
 > 
 > library(fit.models)
-Loading required package: lattice
+
+Attaching package: 'fit.models'
+
+The following object is masked from 'package:stats':
+
+    mahalanobis
+
 > library(MASS)
-Loading required package: MASS
 > 
 > ################################################################################
 > # Test models with differenct formulas
@@ -104,7 +109,8 @@ null device
           1 
 > 
 > rm(fm1, fm1.sum)
-> unlink("fm1.pdf")
+> file.remove("fm1.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -194,7 +200,8 @@ null device
           1 
 > 
 > rm(fm2, fm2.sum)
-> unlink("fm2.pdf")
+> file.remove("fm2.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -280,7 +287,8 @@ null device
           1 
 > 
 > rm(fm3, fm3.sum)
-> unlink("fm3.pdf")
+> file.remove("fm3.pdf")
+[1] TRUE
 > 
 > 
 > ################################################################################
@@ -289,4 +297,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  2.600   0.085   2.741 
+  1.212   0.049   1.256 
