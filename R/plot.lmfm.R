@@ -2,16 +2,18 @@
 #' 
 #' Produces a set of comparison diagnostic plots.  The plot options are
 #' 
-#' \describe{ \item{(2)}{Normal QQ Plot of Residuals,}
-#' \item{(3)}{Kernel Density Estimate of Residuals,}
-#' \item{(4)}{Residuals vs. Leverage,} \item{(5)}{Residuals
-#' vs. Fitted Values,} \item{(6)}{Scale-Location,} \item{(7)}{Response vs.
-#' Fitted Values,} \item{(8)}{Residuals vs. Index (Time),}
-#' \item{(9)}{Overlaid Normal QQ Plot of Residuals,}
-#' \item{(10)}{Overlaid Kernel Density Estimate of Residuals,}
-#' \item{(11)}{Scatter Plot with Overlaid Fits (for simple linear regression
-#' models).} }
-#' 
+#' \describe{
+#'   \item{(2)}{Normal QQ Plot of Residuals,}
+#'   \item{(3)}{Kernel Density Estimate of Residuals,}
+#'   \item{(4)}{Residuals vs. Distance,}
+#'   \item{(5)}{Residuals vs. Fitted Values,}
+#'   \item{(6)}{Scale-Location,}
+#'   \item{(7)}{Response vs. Fitted Values,}
+#'   \item{(8)}{Residuals vs. Index (Time),}
+#'   \item{(9)}{Overlaid Normal QQ Plot of Residuals,}
+#'   \item{(10)}{Overlaid Kernel Density Estimate of Residuals,}
+#'   \item{(11)}{Scatter Plot with Overlaid Fits (for simple linear regression models).}
+#'   }
 #' 
 #' @param x an \code{lmfm} object.
 #' @param which.plots either \code{"ask"}, \code{"all"}, or a vector of integer
@@ -55,6 +57,7 @@
 
 
 #' @S3method plot lmfm
+#' @method plot lmfm
 #' @export plot.lmfm
 plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
 {
@@ -145,11 +148,11 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
                          ylab = expression(plain("Density"))),
 
         scatterPlot.lmfm(x,
-                         x.fun = leverage,
+                         x.fun = MD,
                          y.fun = residuals,
-                         xlab = expression(plain("Leverage")),
+                         xlab = expression(plain("Mahalanobis Distance")),
                          ylab = expression(plain("Residuals")),
-                         main = expression(plain("Residuals vs. Leverage")),
+                         main = expression(plain("Residuals vs. Mahalanobis Distance")),
                          pch = 16),
 
         scatterPlot.lmfm(x,

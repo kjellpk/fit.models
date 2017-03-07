@@ -22,6 +22,7 @@
 
 
 #' @S3method summary lmfm
+#' @method summary lmfm
 #' @export summary.lmfm
 summary.lmfm <- function(object, correlation = FALSE, ...)
 {

@@ -121,7 +121,7 @@ print(fm5.sum <- summary(fm5, correlation = TRUE))
 pdf("fm5.pdf")
 plot(fm5, 2)
 plot(fm5, 3)
-plot(fm5, 4)
+#plot(fm5, 4) #can add this back in after adding MD.rlm
 plot(fm5, 5)
 plot(fm5, 6)
 plot(fm5, 7)

@@ -45,7 +45,7 @@
 #'   # regression models to the Brownlee's Stack Loss Plant Data.
 #' 
 #'   # Step 1: rlm (robust linear model) is in the MASS package.
-#'   require(MASS)
+#'   library(MASS)
 #' 
 #'   # Step 2: tell fit.models rlm can be compared to lm
 #'   fmclass.add.class("lmfm", "rlm")
@@ -53,7 +53,6 @@
 #'   fm1 <- fit.models(c("rlm", "lm"), stack.loss ~ ., data = stackloss)
 #' 
 #'   summary(fm1) #rlm does not provide p-values or Multiple R-squared
-#'   plot(fm1)
 #' 
 #' 
 #'   # Second, use fit.models to combine already fitted models into a

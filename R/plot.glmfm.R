@@ -4,10 +4,10 @@
 #' \describe{
 #'   \item{(2)}{Deviance Residuals vs. Predicted Values,}
 #'   \item{(3)}{Response vs. Fitted Values,}
-#'    \item{(4)}{Normal QQ Plot of Pearson Residuals,}
-#'    \item{(5)}{Normal QQ Plot of Deviance Residuals,}
-#'    \item{(6)}{Pearson Residuals vs. Leverage,}
-#'    \item{(7)}{Scale-Location.}
+#'   \item{(4)}{Normal QQ Plot of Pearson Residuals,}
+#'   \item{(5)}{Normal QQ Plot of Deviance Residuals,}
+#'   \item{(6)}{Pearson Residuals vs. Mahalanobis Distance,}
+#'   \item{(7)}{Scale-Location.}
 #' }
 #' 
 #' @param x a \code{glmfm} object.
@@ -44,6 +44,7 @@
 #' @importFrom utils menu
 
 #' @S3method plot glmfm
+#' @method plot glmfm
 #' @export plot.glmfm
 plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 {
@@ -54,7 +55,7 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                "Response vs. Fitted Values",
                "Normal QQ Plot of Pearson Residuals",
                "Normal QQ Plot of Deviance Residuals",
-               "Pearson Residuals vs. Leverage",
+               "Pearson Residuals vs. Mahalanobis Distance",
                "Scale-Location")
 
   all.plots <- 2:length(choices)
@@ -140,11 +141,11 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                     pch = 16),
 
         scatterPlot.lmfm(x,
-                         x.fun = leverage,
+                         x.fun = MD,
                          y.fun = function(v) residuals(v, type = "pearson"),
-                         xlab = expression(plain("Leverage")),
+                         xlab = expression(plain("Mahalanobis Distance")),
                          ylab = expression(plain("Pearson Residuals")),
-                         main = expression(plain("Pearson Residuals vs. Leverage")),
+                         main = expression(plain("Pearson Residuals vs. Mahalanobis Distance")),
                          pch = 16),
 
         scatterPlot.lmfm(x,

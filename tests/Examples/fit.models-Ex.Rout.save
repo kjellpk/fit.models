@@ -24,6 +24,37 @@ Type 'q()' to quit R.
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
+> nameEx("MD")
+> ### * MD
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MD
+> ### Title: Mahalanobis Distance
+> ### Aliases: MD MD.default MD.lm MD.default MD.lm
+> ### Keywords: methods regression
+> 
+> ### ** Examples
+> 
+> 
+> ## Example from lm:
+> ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
+> trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+> group <- gl(2,10,20, labels=c("Ctl","Trt"))
+> weight <- c(ctl, trt)
+> lm.D9 <- lm(weight ~ group)
+> 
+> MD(lm.D9)
+        1         2         3         4         5         6         7         8 
+0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 
+        9        10        11        12        13        14        15        16 
+0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 0.9746794 
+       17        18        19        20 
+0.9746794 0.9746794 0.9746794 0.9746794 
+> 
+> 
+> 
+> cleanEx()
 > nameEx("fit.models")
 > ### * fit.models
 > 
@@ -43,8 +74,7 @@ Type 'q()' to quit R.
 >   # regression models to the Brownlee's Stack Loss Plant Data.
 > 
 >   # Step 1: rlm (robust linear model) is in the MASS package.
->   require(MASS)
-Loading required package: MASS
+>   library(MASS)
 > 
 >   # Step 2: tell fit.models rlm can be compared to lm
 >   fmclass.add.class("lmfm", "rlm")
@@ -85,7 +115,6 @@ rlm: 2.441 on 17 degrees of freedom
 Multiple R-squared:
  lm: 0.9136 
 
->   plot(fm1)
 > 
 > 
 >   # Second, use fit.models to combine already fitted models into a
@@ -147,34 +176,6 @@ lm.complete: 0.9136
 
 detaching ‘package:MASS’
 
-> nameEx("leverage")
-> ### * leverage
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: leverage
-> ### Title: Leverage
-> ### Aliases: leverage leverage.default leverage.lm leverage.default
-> ###   leverage.lm
-> ### Keywords: methods regression
-> 
-> ### ** Examples
-> 
-> 
-> ## Example from lm:
-> ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
-> trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
-> group <- gl(2,10,20, labels=c("Ctl","Trt"))
-> weight <- c(ctl, trt)
-> lm.D9 <- lm(weight ~ group)
-> 
-> leverage(lm.D9)
-  1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20 
-0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 
-> 
-> 
-> 
-> cleanEx()
 > nameEx("plot.glmfm")
 > ### * plot.glmfm
 > 
@@ -346,7 +347,7 @@ m2: 0.9088
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.103 0.027 1.139 0 0 
+Time elapsed:  0.909 0.026 0.949 0 0 
 > grDevices::dev.off()
 null device 
           1 

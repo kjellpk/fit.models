@@ -1,7 +1,7 @@
 
-R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin14.1.0 (64-bit)
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin16.3.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -20,7 +20,6 @@ Type 'q()' to quit R.
 > data(stackloss)
 > 
 > library(fit.models)
-Loading required package: lattice
 > library(MASS)
 > 
 > # add rlm to the lmfm fit.models class
@@ -420,7 +419,7 @@ Acid.Conc. -1.00
 > pdf("fm5.pdf")
 > plot(fm5, 2)
 > plot(fm5, 3)
-> plot(fm5, 4)
+> #plot(fm5, 4) #can add this back in after adding MD.rlm
 > plot(fm5, 5)
 > plot(fm5, 6)
 > plot(fm5, 7)
@@ -442,4 +441,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  5.813   0.120   5.987 
+  2.708   0.071   2.787 
