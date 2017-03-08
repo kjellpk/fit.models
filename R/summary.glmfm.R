@@ -28,9 +28,8 @@
 #' summary(fm)
 
 
-#' @S3method summary glmfm
-#' @method summary glmfm
 #' @export summary.glmfm
+#' @S3method summary glmfm
 summary.glmfm <- function(object, correlation = FALSE, ...)
 {
   object <- lapply(object, summary, correlation = correlation, ...)

@@ -1,6 +1,6 @@
 #' @importFrom stats coef
-#' @S3method coef lmfm
 
+#' @export
 coef.lmfm <- function(object, ...)
 {
   n.models <- length(object)

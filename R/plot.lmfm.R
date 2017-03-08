@@ -1,18 +1,18 @@
 #' Comparison Diagnostic Plots for Linear Regression Models
 #' 
 #' Produces a set of comparison diagnostic plots.  The plot options are
-#' 
-#' \describe{
-#'   \item{(2)}{Normal QQ Plot of Residuals,}
-#'   \item{(3)}{Kernel Density Estimate of Residuals,}
-#'   \item{(4)}{Residuals vs. Mahalanobis Distance,}
-#'   \item{(5)}{Residuals vs. Fitted Values,}
-#'   \item{(6)}{Scale-Location,}
-#'   \item{(7)}{Response vs. Fitted Values,}
-#'   \item{(8)}{Residuals vs. Index (Time),}
-#'   \item{(9)}{Overlaid Normal QQ Plot of Residuals,}
-#'   \item{(10)}{Overlaid Kernel Density Estimate of Residuals,}
-#'   \item{(11)}{Scatter Plot with Overlaid Fits (for simple linear regression models).}
+#' \enumerate{
+#'   \item (not used)
+#'   \item Normal QQ Plot of Residuals,
+#'   \item Kernel Density Estimate of Residuals,
+#'   \item Residuals vs. Mahalanobis Distance,
+#'   \item Residuals vs. Fitted Values,
+#'   \item Scale-Location,
+#'   \item Response vs. Fitted Values,
+#'   \item Residuals vs. Index (Time),
+#'   \item Overlaid Normal QQ Plot of Residuals,
+#'   \item Overlaid Kernel Density Estimate of Residuals,
+#'   \item Scatter Plot with Overlaid Fits (for simple linear regression models).
 #'   }
 #' 
 #' @param x an \code{lmfm} object.
@@ -23,15 +23,14 @@
 #' @param \dots additional parameters are ignored.
 #' @return \code{x} is invisibly returned.
 #' @section Side Effects: The selected plots are drawn on a graphics device.
-#' @seealso See \code{\link{qqPlot.lmfm}} for (2),
-#' \code{\link{kernDenPlot.lmfm}} for (3), \code{\link{indexPlot.lmfm}} for
-#' (8), \code{\link{overlaidQQPlot.lmfm}} for (9),
-#' \code{\link{overlaidKernDenPlot.lmfm}} for (10),
-#' \code{\link{simpleRegPlot.lmfm}} for (11), and
+#' @seealso See \code{\link{qqPlot.lmfm}} for 2,
+#' \code{\link{kernDenPlot.lmfm}} for 3, \code{\link{indexPlot.lmfm}} for
+#' 8, \code{\link{overlaidQQPlot.lmfm}} for 9,
+#' \code{\link{overlaidKernDenPlot.lmfm}} for 10,
+#' \code{\link{simpleRegPlot.lmfm}} for 11, and
 #' \code{\link{scatterPlot.lmfm}} for the others.
 #' @keywords hplot methods
 #' @examples
-#' 
 #' data(stackloss)
 #' stack.lm <- lm(stack.loss ~ ., data = stackloss)
 #' stack.clean <- lm(stack.loss ~ ., data = stackloss, subset = 5:20)
@@ -56,9 +55,8 @@
 #' @importFrom utils menu
 
 
-#' @S3method plot lmfm
-#' @method plot lmfm
 #' @export plot.lmfm
+#' @S3method plot lmfm
 plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
 {
   choices <- c("All",

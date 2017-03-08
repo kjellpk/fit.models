@@ -1,13 +1,14 @@
 #' Comparison Diagnostic Plots for Generalized Linear Models
 #' 
 #' Produces a set of comparison diagnostic plots.  The plot options are
-#' \describe{
-#'   \item{(2)}{Deviance Residuals vs. Predicted Values,}
-#'   \item{(3)}{Response vs. Fitted Values,}
-#'   \item{(4)}{Normal QQ Plot of Pearson Residuals,}
-#'   \item{(5)}{Normal QQ Plot of Deviance Residuals,}
-#'   \item{(6)}{Pearson Residuals vs. Mahalanobis Distance,}
-#'   \item{(7)}{Scale-Location.}
+#' \enumerate{
+#'   \item (not used)
+#'   \item Deviance Residuals vs. Predicted Values,
+#'   \item Response vs. Fitted Values,
+#'   \item Normal QQ Plot of Pearson Residuals,
+#'   \item Normal QQ Plot of Deviance Residuals,
+#'   \item Pearson Residuals vs. Mahalanobis Distance,
+#'   \item Scale-Location.
 #' }
 #' 
 #' @param x a \code{glmfm} object.
@@ -18,11 +19,10 @@
 #' @param \dots other parameters to be passed through to plotting functions.
 #' @return \code{x} is invisibly returned.
 #' @section Side Effects: The selected plots are drawn on a graphics device.
-#' @seealso \code{\link{qqPlot.lmfm}} for (4) and (5) and
+#' @seealso \code{\link{qqPlot.lmfm}} for 4 and 5 and
 #' \code{\link{scatterPlot.lmfm}} for the others.
 #' @keywords hplot methods
 #' @examples
-#' 
 #' # From ?glm:
 #' # A Gamma example, from McCullagh & Nelder (1989, pp. 300-2)
 #' 
@@ -43,9 +43,8 @@
 #' @importFrom graphics par
 #' @importFrom utils menu
 
-#' @S3method plot glmfm
-#' @method plot glmfm
 #' @export plot.glmfm
+#' @S3method plot glmfm
 plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 {
   n.models <- length(x)

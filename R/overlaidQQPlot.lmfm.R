@@ -14,7 +14,7 @@
 #' @importFrom lattice qqmath strip.default
 
 
-#' @export overlaidQQPlot.lmfm
+#' @export
 overlaidQQPlot.lmfm <- function(x, fun, ...)
 {
   n.models <- length(x)

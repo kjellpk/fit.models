@@ -1,6 +1,6 @@
 #' Register Comparable Functions
 #' 
-#' The fit.models package maintains a list of comparable models.
+#' The \code{fit.models} package maintains a list of comparable models.
 #' These functions provide an api to modify this list.
 #' 
 #' See the package vignette.
@@ -18,9 +18,8 @@
 #' @return a null value is invisibly returned.
 #' @keywords misc
 
-
 #' @rdname fmclass
-#' @export fmclass.register
+#' @export
 fmclass.register <- function(fmclass, classes, validation.function = NULL)
 {
   if(fmclass %in% names(e$fmreg)) {
@@ -37,7 +36,7 @@ fmclass.register <- function(fmclass, classes, validation.function = NULL)
 
 
 #' @rdname fmclass
-#' @export fmclass.add.class
+#' @export
 fmclass.add.class <- function(fmclass, class, warn = TRUE)
 {
   if(class %in% e$fmreg[[fmclass]]$classes && warn) {

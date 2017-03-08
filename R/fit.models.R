@@ -1,30 +1,30 @@
 #' Fit dot Models
 #' 
 #' Fit a statistical model using different estimators (e.g., robust and
-#' least-squares) and/or combine fitted models into a single object.  Generic
+#' least-squares) or combine fitted models into a single object.  Generic
 #' methods then produce side-by-side comparisons of the parameter estimates and
 #' diagnostic plots.
 #' 
-#' There are two distinct ways the fit.models function can be used.
+#' There are two distinct ways the \code{fit.models} function can be used.
 #' 
 #' The first is to fit the same model using different estimators.  In this
 #' case, \code{model.list} should be a character vector or a list where each
 #' element is the name of a modeling function and the remaining arguments (in
-#' \dots{}) are the common arguments to the functions in \code{model.list}.
-#' For example, the following command fits robust and least-squares linear
+#' \dots) are the common arguments to the functions in \code{model.list}.
+#' For example, the following command fits robust and least squares linear
 #' models to Brownlee's Stack Loss Plant Data. \preformatted{
 #' fit.models(c("rlm", "lm"), stack.loss ~ ., data = stackloss)} The resulting
-#' fit.models object is then a list with the output of \preformatted{
+#' \code{fit.models} object is a list with the output of \preformatted{
 #' rlm(stack.loss ~ ., data = stackloss)} in the first element and
 #' \preformatted{ lm(stack.loss ~ ., data = stackloss)} in the second.  The
 #' class attribute of the returned list is set (in this case) to \code{"lmfm"}
-#' which is the fit.models class (fmclass) for comparing linear-model-like
+#' which is the \code{fit.models} class (fmclass) for comparing linear-model-like
 #' fits.
 #' 
-#' The second use of fit.models is to combine already fitted model objects.  In
-#' this case fit.models combines its arguments into a fit.models object (a list
-#' where element i is occupied by argument i) and sets the class attribute to
-#' the most appropriate fit.models class.
+#' The second use of fit.models is to combine fitted model objects.  In
+#' this case, \code{fit.models} combines its arguments into a fit.models object
+#' (a list where element \eqn{i} is occupied by argument \eqn{i} and sets the
+#' class attribute to the appropriate \code{fit.models} class.
 #' 
 #' @param model.list a list or a character vector containing names of modeling
 #' functions.  Only required when \code{fit.models} is being used to fit models
@@ -38,11 +38,8 @@
 #' fit.models class.
 #' @keywords models
 #' @examples
-#' 
-#'   data(stackloss)
-#' 
-#'   # First, use fit.models to fit robust and least-squares linear
-#'   # regression models to the Brownlee's Stack Loss Plant Data.
+#'   # First, use fit.models to fit robust and least squares linear
+#'   # regression models to Brownlee's Stack Loss Plant Data.
 #' 
 #'   # Step 1: rlm (robust linear model) is in the MASS package.
 #'   library(MASS)
@@ -55,7 +52,7 @@
 #'   summary(fm1) #rlm does not provide p-values or Multiple R-squared
 #' 
 #' 
-#'   # Second, use fit.models to combine already fitted models into a
+#'   # Second, use fit.models to combine fitted models into a
 #'   # fit.models object.
 #' 
 #'   lm.complete <- lm(stack.loss ~ ., data = stackloss)
@@ -69,13 +66,13 @@
 #' 
 #'   # Name the models in the fit.models object.
 #'   
-#'   fm3 <- fit.models(c(Robust = "rlm", "Least-Squares" = "lm"),
+#'   fm3 <- fit.models(c(Robust = "rlm", "Least Squares" = "lm"),
 #'                     stack.loss ~ ., data = stackloss)
 #' 
 #'   fm4 <- fit.models(Clean = lm.clean, Complete = lm.complete)
 
 
-#' @export fit.models
+#' @export
 fit.models <- function(model.list, ...)
 {
   fm.call <- match.call()
