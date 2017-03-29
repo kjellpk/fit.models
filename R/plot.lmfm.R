@@ -146,7 +146,7 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
                          ylab = expression(plain("Density"))),
 
         scatterPlot.lmfm(x,
-                         x.fun = function(u) sqrt(mahalanobis(u)),
+                         x.fun = function(u) sqrt(designMD(u)),
                          y.fun = residuals,
                          xlab = expression(plain("Mahalanobis Distance")),
                          ylab = expression(plain("Residuals")),
