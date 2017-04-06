@@ -1,16 +1,13 @@
 Package: fit.models
 Version: 0.5-14
-Date: 2017-04-03
+Date: 2017-04-06
 Title: Compare Fitted Models
-Description: A collection of functions intended to aid package authors facilitate \
-  model comparison. Presently the functions designMD, indexPlot.lmfm, kernDenPlot.lmfm, \
-  overlaidKernDenPlot.lmfm, overlaidQQPlot.lmfm, qqPlot.lmfm, scatterPlot.lmfm, and \
-  simpleRegPlot.lmfm comprise this collection. These functions are used to extend \
-  R's common generic functions (e.g., print, summary, plot, etc.) to provide \
-  side-by-side comparison of fitted model objects inheriting from class lm, and \
-  (separately) fitted model objects inheriting from class glm. The API provided \
-  by this package is not frozen and is highly likely to change until the package \
-  reaches version 1.0.
+Description: The fit.models function and its associated methods (coefficients,
+  print, summary, plot, etc.) were originally provided in the robust package to
+  compare robustly and classically fitted model objects. The aim of the fit.models
+  package is to separate this fitted model object comparison functionality from
+  the robust package and to extend it to support fitting methods (e.g., classical,
+  robust, Bayesian, regularized, etc.) more generally.
 Author: Kjell Konis <kjell.konis@me.com>.
 Maintainer: Kjell Konis <kjell.konis@me.com>
 Imports: lattice, stats
