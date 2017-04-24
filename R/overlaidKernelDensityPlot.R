@@ -14,7 +14,7 @@
 #' @importFrom lattice densityplot strip.default
 
 
-#' @export overlaidKernelDensityPlot
+#' @export
 overlaidKernelDensityPlot <- function(x, fun, ...)
 {
   n.models <- length(x)

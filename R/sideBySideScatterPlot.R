@@ -3,7 +3,7 @@
 #' Produces a side-by-side scatter plot.
 #' 
 #' 
-#' @param object an lmfm object.
+#' @param object a \code{fit.models} object.
 #' @param x.fun a function to extract the x-axis quantity.
 #' @param y.fun a function to extract the y-axis quantity.
 #' @param \dots additional arguments.
@@ -14,8 +14,8 @@
 #' @importFrom lattice xyplot panel.xyplot strip.default
 
 
-#' @export scatterPlot.lmfm
-scatterPlot.lmfm <- function(object, x.fun, y.fun, ...)
+#' @export
+sideBySideScatterPlot <- function(object, x.fun, y.fun, ...)
 {
   n.models <- length(object)
   mod.names <- names(object)

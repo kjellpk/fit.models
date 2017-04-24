@@ -4,8 +4,8 @@
 #' can be included in each plot.
 #' 
 #' 
-#' @param x an lmfm object.
-#' @param fun a function to extract the appropriate quantity from \code{x}.
+#' @param x a \code{fit.models} object.
+#' @param fun a function to extract the desired quantity from \code{x}.
 #' @param envelope a logical value.  If \code{TRUE} a \code{level} confidence
 #' envelope is simulated for each QQ plot.
 #' @param half.normal a logical value.  If \code{TRUE} the plot is drawn using
@@ -28,10 +28,10 @@
 #' @importFrom stats rnorm quantile qnorm qqnorm
 
 
-#' @export qqPlot.lmfm
-qqPlot.lmfm <- function(x, fun, envelope = TRUE, half.normal = FALSE,
-                        n.samples = 250, level = .95, id.n = 3, qqline = TRUE,
-                        ...)
+#' @export
+sideBySideQQPlot <- function(x, fun, envelope = TRUE, half.normal = FALSE,
+                             n.samples = 250, level = .95, id.n = 3, qqline = TRUE,
+                             ...)
 {
   confidence.envelope <- function(n, sd = 1, n.samples = 250, level = 0.95,
                                   half.normal = FALSE)

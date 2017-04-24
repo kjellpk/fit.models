@@ -3,8 +3,8 @@
 #' Produces side-by-side index (time) plots.
 #' 
 #' 
-#' @param x an lmfm object.
-#' @param fun a function to extract the appropriate quantity from \code{x}.
+#' @param x a \code{fit.models} object.
+#' @param fun a function to extract the desired quantity from \code{x}.
 #' @param level a numeric value between 0 and 1 specifying the confidence level
 #' used to draw the threshold in the plot.
 #' @param id.n a non-negative integer value specifying the number of extreme
@@ -18,8 +18,8 @@
 #' @importFrom lattice xyplot panel.xyplot panel.text panel.abline strip.default
 
 
-#' @export indexPlot.lmfm
-indexPlot.lmfm <- function(x, fun, level = 0.95, id.n = 3, ...)
+#' @export
+sideBySideIndexPlot <- function(x, fun, level = 0.95, id.n = 3, ...)
 {
   n.models <- length(x)
   mod.names <- names(x)

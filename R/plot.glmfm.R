@@ -19,8 +19,8 @@
 #' @param \dots other parameters to be passed through to plotting functions.
 #' @return \code{x} is invisibly returned.
 #' @section Side Effects: The selected plots are drawn on a graphics device.
-#' @seealso \code{\link{qqPlot.lmfm}} for 4 and 5 and
-#' \code{\link{scatterPlot.lmfm}} for the others.
+#' @seealso \code{\link{sideBySideQQPlot}} for 4 and 5 and
+#' \code{\link{sideBySideScatterPlot}} for the others.
 #' @keywords hplot methods
 #' @examples
 #' # From ?glm:
@@ -107,53 +107,53 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 
         place.holder <- 1,
 
-        scatterPlot.lmfm(x,
-                         x.fun = predict,
-                         y.fun = function(u) residuals(u, type = "deviance"),
-                         xlab = expression(plain("Predicted Values")),
-                         ylab = expression(plain("Deviance Residuals")),
-                         main = expression(plain("Deviance Residuals vs. Predicted Values")),
+        sideBySideScatterPlot(x,
+                              x.fun = predict,
+                              y.fun = function(u) residuals(u, type = "deviance"),
+                              xlab = expression(plain("Predicted Values")),
+                              ylab = expression(plain("Deviance Residuals")),
+                              main = expression(plain("Deviance Residuals vs. Predicted Values")),
+                              pch = 16),
+
+        sideBySideScatterPlot(x,
+                              x.fun = fitted,
+                              y.fun = function(u) model.response(model.frame(u)),
+                              xlab = expression(plain("Fitted Values")),
+                              ylab = expression(plain("Response")),
+                              main = expression(plain("Response vs. Fitted Values")),
+                              pch = 16),
+
+        sideBySideQQPlot(x,
+                         fun = function(u) residuals(u, type = "pearson"),
+                         xlab = expression(plain("Standard Normal Quantiles")),
+                         ylab = expression(plain("Empirical Quantiles of Pearson Residuals")),
+                         main = expression(plain("Normal QQ Plot of Pearson Residuals")),
+                         envelope = FALSE,
                          pch = 16),
 
-        scatterPlot.lmfm(x,
-                         x.fun = fitted,
-                         y.fun = function(u) model.response(model.frame(u)),
-                         xlab = expression(plain("Fitted Values")),
-                         ylab = expression(plain("Response")),
-                         main = expression(plain("Response vs. Fitted Values")),
+        sideBySideQQPlot(x,
+                         fun = function(u) residuals(u, type = "deviance"),
+                         xlab = expression(plain("Standard Normal Quantiles")),
+                         ylab = expression(plain("Empirical Quantiles of Deviance Residuals")),
+                         main = expression(plain("Normal QQ Plot of Deviance Residuals")),
+                         envelope = FALSE,
                          pch = 16),
 
-        qqPlot.lmfm(x,
-                    fun = function(u) residuals(u, type = "pearson"),
-                    xlab = expression(plain("Standard Normal Quantiles")),
-                    ylab = expression(plain("Empirical Quantiles of Pearson Residuals")),
-                    main = expression(plain("Normal QQ Plot of Pearson Residuals")),
-                    envelope = FALSE,
-                    pch = 16),
+        sideBySideScatterPlot(x,
+                              x.fun = function(u) sqrt(designMD(u)),
+                              y.fun = function(v) residuals(v, type = "pearson"),
+                              xlab = expression(plain("Mahalanobis Distance")),
+                              ylab = expression(plain("Pearson Residuals")),
+                              main = expression(plain("Pearson Residuals vs. Mahalanobis Distance")),
+                              pch = 16),
 
-        qqPlot.lmfm(x,
-                    fun = function(u) residuals(u, type = "deviance"),
-                    xlab = expression(plain("Standard Normal Quantiles")),
-                    ylab = expression(plain("Empirical Quantiles of Deviance Residuals")),
-                    main = expression(plain("Normal QQ Plot of Deviance Residuals")),
-                    envelope = FALSE,
-                    pch = 16),
-
-        scatterPlot.lmfm(x,
-                         x.fun = function(u) sqrt(designMD(u)),
-                         y.fun = function(v) residuals(v, type = "pearson"),
-                         xlab = expression(plain("Mahalanobis Distance")),
-                         ylab = expression(plain("Pearson Residuals")),
-                         main = expression(plain("Pearson Residuals vs. Mahalanobis Distance")),
-                         pch = 16),
-
-        scatterPlot.lmfm(x,
-                         x.fun = predict,
-                         y.fun = function(u) sqrt(abs(residuals(u, type = "deviance"))),
-                         xlab = expression(plain("Predicted Values")),
-                         ylab = expression(sqrt(abs(plain("Deviance Residuals")))),
-                         main = expression(plain("Scale-Location")),
-                         pch = 16)
+        sideBySideScatterPlot(x,
+                              x.fun = predict,
+                              y.fun = function(u) sqrt(abs(residuals(u, type = "deviance"))),
+                              xlab = expression(plain("Predicted Values")),
+                              ylab = expression(sqrt(abs(plain("Deviance Residuals")))),
+                              main = expression(plain("Scale-Location")),
+                              pch = 16)
       )
     }
   }
