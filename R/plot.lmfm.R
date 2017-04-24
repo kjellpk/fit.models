@@ -191,11 +191,11 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
                             ylab = expression(plain("Empirical Quantiles of Residuals")),
                             pch = 16),
 
-        overlaidKernDenPlot.lmfm(x,
-                                 fun = residuals,
-                                 main = expression(plain("Kernel Density Estimate of Residuals")),
-                                 xlab = expression(plain("Residuals")),
-                                 ylab = expression(plain("Density"))),
+        overlaidKernelDensityPlot(x,
+                                  fun = residuals,
+                                  main = expression(plain("Kernel Density Estimate of Residuals")),
+                                  xlab = expression(plain("Residuals")),
+                                  ylab = expression(plain("Density"))),
 
         simpleRegPlot.lmfm(x,
                            main = expression(plain("Scatter Plot with Overlaid Fits")),
