@@ -1,9 +1,9 @@
 #' @importFrom stats coef printCoefmat
 
 #' @export
-print.summary.lmfm <- function(x, digits = max(3, getOption("digits") - 3),
-                               signif.stars = getOption("show.signif.stars"),
-                               ...)
+print.summary.lm.fit.models <- function(x, digits = max(3, getOption("digits") - 3),
+                                        signif.stars = getOption("show.signif.stars"),
+                                        ...)
 {
   n.models <- length(x)
   mod.names <- names(x)

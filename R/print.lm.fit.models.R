@@ -1,5 +1,5 @@
 #' @export
-print.lmfm <- function(x, digits = max(3, getOption("digits") - 3), ...)
+print.lm.fit.models <- function(x, digits = max(3, getOption("digits") - 3), ...)
 {
   n.models <- length(x)
   fancy.names <- format(paste(names(x), ":", sep = ""), justify = "right")

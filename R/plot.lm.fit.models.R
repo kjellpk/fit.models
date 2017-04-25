@@ -56,9 +56,9 @@
 #' @importFrom utils menu
 
 
-#' @export plot.lmfm
-#' @S3method plot lmfm
-plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
+#' @export plot.lm.fit.models
+#' @S3method plot lm.fit.models
+plot.lm.fit.models <- function(x, which.plots = c(5, 2, 6, 4), ...)
 {
   choices <- c("All",
     "Normal QQ Plot of Residuals", 

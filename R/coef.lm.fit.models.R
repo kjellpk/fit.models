@@ -1,7 +1,7 @@
 #' @importFrom stats coef
 
 #' @export
-coef.lmfm <- function(object, ...)
+coef.lm.fit.models <- function(object, ...)
 {
   n.models <- length(object)
   mod.names <- names(object)

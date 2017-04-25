@@ -175,7 +175,7 @@ fit.models <- function(model.list, ...)
   idx <- sapply(candidates, function(u) length(intersect(u, classes)))
   fmclass <- names(which(idx == max(idx)))[1]
 
-  oldClass(model.list) <- fmclass
+  oldClass(model.list) <- c(fmclass, "fit.models")
   model.list
 }
 
