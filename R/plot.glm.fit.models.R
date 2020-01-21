@@ -43,9 +43,9 @@
 #' @importFrom graphics par
 #' @importFrom utils menu
 
-#' @export plot.glm.fit.models
-#' @S3method plot glm.fit.models
-plot.glm.fit.models <- function(x, which.plots = c(2, 5, 7, 6), ...)
+#' @export plot.glmfm
+#' @S3method plot glmfm
+plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 {
   n.models <- length(x)
 

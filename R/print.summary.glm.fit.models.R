@@ -1,7 +1,7 @@
 #' @importFrom stats coef printCoefmat
 
 #' @export
-print.summary.glm.fit.models <- function(x, digits = max(3, getOption("digits") - 3),
+print.summary.glmfm <- function(x, digits = max(3, getOption("digits") - 3),
                                          signif.stars = getOption("show.signif.stars"),
                                          ...)
 {

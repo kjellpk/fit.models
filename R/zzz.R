@@ -3,11 +3,11 @@
   assign("fmreg", list(), envir = e)
   
 
-  fmclass.register(fmclass = "lm.fit.models",
+  fmclass.register(fmclass = "lmfm",
                    classes = c("lm"),
                    validation.function = NULL)
                                  
-  fmclass.register(fmclass = "glm.fit.models",
+  fmclass.register(fmclass = "glmfm",
                    classes = c("glm"),
                    validation.function = NULL)
 

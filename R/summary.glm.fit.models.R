@@ -28,12 +28,12 @@
 #' summary(fm)
 
 
-#' @export summary.glm.fit.models
-#' @S3method summary glm.fit.models
-summary.glm.fit.models <- function(object, correlation = FALSE, ...)
+#' @export summary.glmfm
+#' @S3method summary glmfm
+summary.glmfm <- function(object, correlation = FALSE, ...)
 {
   object <- lapply(object, summary, correlation = correlation, ...)
-  oldClass(object) <- "summary.glm.fit.models"
+  oldClass(object) <- "summary.glmfm"
   object
 }
 

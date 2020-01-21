@@ -13,5 +13,4 @@ Maintainer: Kjell Konis <kjell.konis@me.com>
 Imports: lattice, stats
 Suggests: MASS
 License: GPL
-RoxygenNote: 6.0.1
-
+RoxygenNote: 7.0.2
