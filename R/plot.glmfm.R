@@ -43,8 +43,7 @@
 #' @importFrom graphics par
 #' @importFrom utils menu
 
-#' @export plot.glmfm
-#' @S3method plot glmfm
+#' @export
 plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
 {
   n.models <- length(x)
@@ -55,7 +54,7 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                "Normal QQ Plot of Pearson Residuals",
                "Normal QQ Plot of Deviance Residuals",
                "Pearson Residuals vs. Mahalanobis Distance",
-               "Scale-Location")
+               "Scale-center")
 
   all.plots <- 2:length(choices)
 

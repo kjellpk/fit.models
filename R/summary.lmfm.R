@@ -21,8 +21,7 @@
 #' print(fm.sum <- summary(fm))
 
 
-#' @export summary.lmfm
-#' @S3method summary lmfm
+#' @export
 summary.lmfm <- function(object, correlation = FALSE, ...)
 {
   object <- lapply(object, summary, correlation = correlation, ...)

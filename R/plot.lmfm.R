@@ -56,8 +56,7 @@
 #' @importFrom utils menu
 
 
-#' @export plot.lmfm
-#' @S3method plot lmfm
+#' @export 
 plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
 {
   choices <- c("All",

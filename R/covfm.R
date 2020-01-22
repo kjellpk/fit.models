@@ -1,4 +1,6 @@
 
+#' @importFrom stats vcov
+
 #' @export
 vcov.default <- function(object, ...)
 {
@@ -9,13 +11,22 @@ vcov.default <- function(object, ...)
 }
 
 
+#' Extract Location Estimate for a Fitted Model Object
+#'
+#' @description Returns the location estimated from a
+#'              location/scatter-type fitted model object.
+#'
+#' @param object a fitted model object.
+#'
+#' @param \dots additional arguments for method functions.
+#' 
 #' @export
-location <- function(object, ...)
-  UseMethod("location")
+center <- function(object, ...)
+  UseMethod("center")
 
 
 #' @export
-location.default <- function(object, ...)
+center.default <- function(object, ...)
 {
   if(!is.null(object$center) && is.vector(object$center))
     return(object$center)
@@ -24,7 +35,6 @@ location.default <- function(object, ...)
 }
 
 
-#' @export
 valid.covfm <- function(x)
-  !is.null(vcov(x)) && !is.null(location(x) && all(dim(vcov(x)) == length(location(x))))
+  !is.null(vcov(x)) && !is.null(center(x) && all(dim(vcov(x)) == length(center(x))))
 

@@ -29,7 +29,7 @@ print.covfm <- function(x, digits = max(3, getOption("digits") - 3), ...)
   center.names <- names(x[[1]]$center)
   dimnames(center) <- list(mod.names, center.names)
 
-  cat("\nComparison of Location Estimates: \n")
+  cat("\nComparison of center Estimates: \n")
   print(center, digits = digits, ...)
 
   invisible(x)

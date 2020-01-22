@@ -6,7 +6,7 @@
 #' @param x a \code{fit.models} object.
 #' @param fun a function to extract the desired quantity from \code{x}.
 #' @param \dots additional arguments are passed to
-#' \code{\link[lattice]{densityplot}}.
+#' \code{densityplot}.
 #' @return the \code{trellis} object is invisibly returned.
 #' @keywords hplot
 

@@ -52,7 +52,7 @@ ellipsesPlot.covfm <- function(x, ...)
     y.max <- -Inf
 
     for(i in 1:n.models) {
-      z[[i]] <- ellipse(location(x[[i]]), vcov(x[[i]]))
+      z[[i]] <- ellipse(center(x[[i]]), vcov(x[[i]]))
       x.min <- min(x.min, z[[i]][,1])
       x.max <- max(x.max, z[[i]][,1])
       y.min <- min(y.min, z[[i]][,2])
@@ -83,8 +83,8 @@ ellipsesPlot.covfm <- function(x, ...)
     plot(X,
          xlim = c(center[1] - s.range, center[1] + s.range),
          ylim = c(center[2] - s.range, center[2] + s.range),
-         xlab = names(location(x[[1]]))[1],
-         ylab = names(location(x[[1]]))[2],
+         xlab = names(center(x[[1]]))[1],
+         ylab = names(center(x[[1]]))[2],
          main = header,
          col = "lightgray",
          pch = 16,

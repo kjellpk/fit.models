@@ -58,3 +58,6 @@ screePlot.covfm <- function(x, npcs, strip = "", ...)
 }
 
 
+utils::globalVariables(c("mod"))
+
+
