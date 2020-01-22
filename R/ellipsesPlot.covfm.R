@@ -10,7 +10,7 @@
 #'              \code{covfm} object.
 #'
 #' @param x a \code{"covfm"} object.
-#' @param ... additional arguments are ignored.
+#' @param \dots additional arguments are ignored.
 #'
 #' @return x is invisibly returned.
 #'

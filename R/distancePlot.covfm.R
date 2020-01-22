@@ -12,7 +12,7 @@
 #' @param id.n a single nonnegative integer specifying the number of extreme points to
 #'             label in the plot.
 #'             
-#' @param ... additional arguments are passed to \code{xyplot}.
+#' @param \dots additional arguments are passed to \code{xyplot}.
 #'
 #' @return the \code{trellis} object is invisibly returned.
 #'
