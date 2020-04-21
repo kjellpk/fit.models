@@ -1,6 +1,6 @@
 Package: fit.models
-Version: 0.5-14
-Date: 2017-04-06
+Version: 0.6
+Date: 2020-04-21
 Title: Compare Fitted Models
 Description: The fit.models function and its associated methods (coefficients,
   print, summary, plot, etc.) were originally provided in the robust package to
@@ -8,9 +8,10 @@ Description: The fit.models function and its associated methods (coefficients,
   package is to separate this fitted model object comparison functionality from
   the robust package and to extend it to support fitting methods (e.g., classical,
   robust, Bayesian, regularized, etc.) more generally.
-Author: Kjell Konis <kjell.konis@me.com>.
-Maintainer: Kjell Konis <kjell.konis@me.com>
+Authors@R: person("Kjell", "Konis", role = c("aut", "cre"), email = "kjellk@gmail.com")
+Author: Kjell Konis [aut, cre]
+Maintainer: Kjell Konis <kjellk@gmail.com>
 Imports: lattice, stats
 Suggests: MASS
 License: GPL
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0

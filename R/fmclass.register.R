@@ -23,7 +23,7 @@
 fmclass.register <- function(fmclass, classes, validation.function = NULL)
 {
   if(fmclass %in% names(e$fmreg)) {
-    warning(fmclass, " is already registered in the fit.models registry")
+    message(fmclass, " is already registered in the fit.models registry")
     return(invisible())
   }
 
@@ -40,7 +40,7 @@ fmclass.register <- function(fmclass, classes, validation.function = NULL)
 fmclass.add.class <- function(fmclass, class, warn = TRUE)
 {
   if(class %in% e$fmreg[[fmclass]]$classes && warn) {
-    warning(class, " is already registered in the fit.models registry")
+    message(class, " is already registered in the fit.models registry")
     return(invisible())
   }
   
