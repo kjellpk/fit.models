@@ -7,7 +7,7 @@
 #'   \item Kernel Density Estimate of Residuals,
 #'   \item Residuals vs. Mahalanobis Distance,
 #'   \item Residuals vs. Fitted Values,
-#'   \item Scale-Location,
+#'   \item Sqrt Residuals vs. Fitted Values,
 #'   \item Response vs. Fitted Values,
 #'   \item Residuals vs. Index (Time),
 #'   \item Overlaid Normal QQ Plot of Residuals,
@@ -57,14 +57,14 @@
 
 
 #' @export 
-plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
+plot.lmfm <- function(x, which.plots = "all", ...)
 {
   choices <- c("All",
     "Normal QQ Plot of Residuals", 
     "Kernel Density Estimate of Residuals",
     "Residuals vs. Mahalanobis Distance",
     "Residuals vs. Fitted Values", 
-    "Scale-Location", 
+    "Sqrt Residuals vs. Fitted Values", 
     "Response vs. Fitted Values", 
     "Residuals vs. Index (Time)", 
     "Overlaid Normal QQ Plot of Residuals", 
@@ -164,7 +164,7 @@ plot.lmfm <- function(x, which.plots = c(5, 2, 6, 4), ...)
         sideBySideScatterPlot(x,
                               x.fun = fitted,
                               y.fun = function(u) sqrt(abs(residuals(u))),
-                              main = expression(plain("Scale-Location")),
+                              main = expression(paste(sqrt(abs(plain("Residuals"))), plain(" vs. Fitted Values"))),
                               xlab = expression(plain("Fitted Values")),
                               ylab = expression(sqrt(abs(plain("Residuals")))),
                               pch = 16),

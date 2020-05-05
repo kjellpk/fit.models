@@ -15,7 +15,7 @@
 #' @return \code{x} is invisibly returned.
 #' 
 #' @export
-plot.covfm <- function(x, which.plots = c(4, 3, 5), ...)
+plot.covfm <- function(x, which.plots = "all", ...)
 {
   n.models <- length(x)
   mod.names <- names(x)

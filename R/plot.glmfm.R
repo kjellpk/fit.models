@@ -8,7 +8,7 @@
 #'   \item Normal QQ Plot of Pearson Residuals,
 #'   \item Normal QQ Plot of Deviance Residuals,
 #'   \item Pearson Residuals vs. Mahalanobis Distance,
-#'   \item Scale-Location.
+#'   \item Sqrt Deviance Residuals vs. Predicted Values.
 #' }
 #' 
 #' @param x a \code{glmfm} object.
@@ -44,7 +44,7 @@
 #' @importFrom utils menu
 
 #' @export
-plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
+plot.glmfm <- function(x, which.plots = "all", ...)
 {
   n.models <- length(x)
 
@@ -54,7 +54,7 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                "Normal QQ Plot of Pearson Residuals",
                "Normal QQ Plot of Deviance Residuals",
                "Pearson Residuals vs. Mahalanobis Distance",
-               "Scale-center")
+               "Sqrt Deviance Residuals vs. Predicted Values")
 
   all.plots <- 2:length(choices)
 
@@ -151,7 +151,7 @@ plot.glmfm <- function(x, which.plots = c(2, 5, 7, 6), ...)
                               y.fun = function(u) sqrt(abs(residuals(u, type = "deviance"))),
                               xlab = expression(plain("Predicted Values")),
                               ylab = expression(sqrt(abs(plain("Deviance Residuals")))),
-                              main = expression(plain("Scale-Location")),
+                              main = expression(paste(sqrt(abs(plain("Deviance Residuals"))), plain(" vs. Predicted Values"))),
                               pch = 16)
       )
     }
