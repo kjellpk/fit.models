@@ -10,15 +10,15 @@
 
         {
 
-            "label": "devtools::document()",
+            "label": "Clean",
 
             "type": "shell",
 
-            "command": "",
+            "command": "rm -rf fit.models.Rcheck ${workspaceFolderBasename}_*.tar.gz",
 
             "windows": {
 
-                "command": "Rscript.exe -e 'devtools::document()'"
+                "command": "rm -rf fit.models.Rcheck ${workspaceFolderBasename}_*.tar.gz"
 
             },
 
@@ -38,21 +38,83 @@
 
         {
 
-            "label": "R CMD check",
+            "label": "roxygen2::roxygenize()",
+
+            "type": "shell",
+
+            "command": "Rscript -e 'roxygen2::roxygenize()'",
+
+            "windows": {
+
+                "command": "Rscript.exe -e 'roxygen2::roxygenize()'"
+
+            },
+
+            "group": "build",
+
+            "presentation": {
+
+                "reveal": "always",
+
+                "panel": "shared"
+
+            },
+
+            "problemMatcher": []
+
+        },
+
+        {
+
+            "label": "PreOps",
 
             "dependsOn": [
 
-                "devtools::document()"
+                "roxygen2::roxygenize()"
 
             ],
 
             "type": "shell",
 
-            "command": "",
+            "command": "Rscript ${workspaceFolder}/tweekNAMESPACE.R ${workspaceFolder}",
 
             "windows": {
 
-                "command": "Rscript.exe -e 'devtools::check()'"
+                "command": "Rscript.exe ${workspaceFolder}/tweekNAMESPACE.R ${workspaceFolder}"
+
+            },
+
+            "group": "build",
+
+            "presentation": {
+
+                "reveal": "always",
+
+                "panel": "shared"
+
+            },
+
+            "problemMatcher": []
+
+        },
+
+        {
+
+            "label": "R CMD build",
+
+            "dependsOn": [
+                
+                "PreOps"
+            
+            ],
+
+            "type": "shell",
+
+            "command": "R CMD build ${workspaceFolder}",
+
+            "windows": {
+
+                "command": "R.exe CMD build ${workspaceFolder}"
 
             },
 
@@ -76,17 +138,51 @@
 
             "dependsOn": [
 
-                "devtools::document()"
+                "R CMD build"
 
             ],
 
             "type": "shell",
 
-            "command": "",
+            "command": "R CMD INSTALL ${workspaceFolderBasename}_*.tar.gz",
 
             "windows": {
 
-                "command": "Rscript.exe -e 'devtools::install()'"
+                "command": "R.exe CMD INSTALL ${workspaceFolderBasename}_*.tar.gz"
+
+            },
+
+            "group": "build",
+
+            "presentation": {
+
+                "reveal": "always",
+
+                "panel": "shared"
+
+            },
+
+            "problemMatcher": []
+
+        },
+
+        {
+
+            "label": "R CMD check",
+
+            "dependsOn": [
+
+                "R CMD build"
+
+            ],
+
+            "type": "shell",
+
+            "command": "R CMD check ${workspaceFolderBasename}_*.tar.gz",
+
+            "windows": {
+
+                "command": "R.exe CMD check ${workspaceFolderBasename}_*.tar.gz"
 
             },
 
