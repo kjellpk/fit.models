@@ -7,7 +7,7 @@
 #' @param which.plots either "ask", "all", or an integer vector specifying which plots
 #'                    to draw.  If which.plots is an integer vector, use the plot numbers
 #'                    given here (or in the "ask" menu).  The plot options are
-#'                    (2) Eigenvalues of Covariance Estimate, (3) Sqrt of Mahalanobis Distances,
+#'                    (2) Sqrt of Mahalanobis Distances, (3) Eigenvalues of Covariance Estimate, 
 #'                    (4) Ellipses Matrix, and (5) Distance - Distance Plot.
 #'
 #' @param ... additional arguments are passed to the plot subfunctions.
@@ -21,8 +21,8 @@ plot.covfm <- function(x, which.plots = "all", ...)
   mod.names <- names(x)
 
   choices <- c("All",
-               "Eigenvalues of Covariance Estimate", 
                "Mahalanobis Distances",
+               "Eigenvalues of Covariance Estimate", 
                "Ellipses Plot")
 
   if(n.models == 2)
@@ -35,6 +35,9 @@ plot.covfm <- function(x, which.plots = "all", ...)
   tmenu <- paste("plot:", choices)
 
   if(is.numeric(which.plots)) {
+    if(length(which.plots) == 1 && which.plots == 1)
+      which.plots <- all.plots
+
     if(!all(which.plots %in% all.plots))
       stop(sQuote("which"), " must be in 2:", length(choices))
 
@@ -82,12 +85,6 @@ plot.covfm <- function(x, which.plots = "all", ...)
         return(invisible(x)),
         place.holder <- 1,
 
-        screePlot.covfm(x,
-                       xlab = "Principal Component",
-                       ylab = "Variances",
-                       main = "Screeplot",
-                       ...),
-
         distancePlot.covfm(x,
                           xlab = "Index",
                           ylab = "Mahalanobis Distance",
@@ -96,6 +93,12 @@ plot.covfm <- function(x, which.plots = "all", ...)
 
         ellipsesPlot.covfm(x, ...),
         
+        screePlot.covfm(x,
+                       xlab = "Principal Component",
+                       ylab = "Variances",
+                       main = "Screeplot",
+                       ...),
+
         {
           strip <- paste(mod.names[1], "Distance vs.", mod.names[2], "Distance")
           ddPlot.covfm(x,

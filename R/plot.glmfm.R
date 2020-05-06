@@ -61,6 +61,9 @@ plot.glmfm <- function(x, which.plots = "all", ...)
   tmenu <- paste("plot:", choices)
 
   if(is.numeric(which.plots)) {
+    if(length(which.plots) == 1 && which.plots == 1)
+      which.plots <- all.plots
+
     if(!all(which.plots %in% all.plots))
       stop(sQuote("which"), " must be in 2:", length(choices))
 
