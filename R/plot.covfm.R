@@ -4,86 +4,63 @@
 #'
 #' @param x a \code{covfm} object.
 #' 
-#' @param which.plots either "ask", "all", or an integer vector specifying which plots
-#'                    to draw.  If which.plots is an integer vector, use the plot numbers
-#'                    given here (or in the "ask" menu).  The plot options are
-#'                    (2) Sqrt of Mahalanobis Distances, (3) Eigenvalues of Covariance Estimate, 
-#'                    (4) Ellipses Matrix, and (5) Distance - Distance Plot.
+#' @param which.plots either \code{"ask"} (character string) or an integer vector specifying
+#'                    which plots to draw.  The plot options are (1) Mahalanobis Distance,
+#'                    (2) Ellipses Matrix, (3) Screeplot (Eigenvalues of Covariance Estimate),
+#'                    and (4) Distance - Distance Plot.
 #'
 #' @param ... additional arguments are passed to the plot subfunctions.
 #'
-#' @return \code{x} is invisibly returned.
+#' @return \code{x} is returned invisibly.
 #' 
 #' @export
-plot.covfm <- function(x, which.plots = "all", ...)
+plot.covfm <- function(x, which.plots = 1:4, ...)
 {
   n.models <- length(x)
   mod.names <- names(x)
 
-  choices <- c("All",
-               "Mahalanobis Distances",
-               "Eigenvalues of Covariance Estimate", 
-               "Ellipses Plot")
+  if(length(which.plots) == 1 && casefold(which.plots) == "all")
+    which.plots <- 1:4
 
-  if(n.models == 2)
+  choices <- c("Mahalanobis Distance",
+               "Ellipses Plot",
+               "Screeplot")
+
+  if(n.models == 2) {
     choices <- c(choices, "Distance - Distance Plot")
+    all.plots <- 1:4
+  }
   else
-    which.plots <- which.plots[which.plots != 5]
+    all.plots <- 1:3
 
-  all.plots <- 2:length(choices)
-
-  tmenu <- paste("plot:", choices)
+  if(length(which.plots) == 0)
+    return(invisible(x))
 
   if(is.numeric(which.plots)) {
-    if(length(which.plots) == 1 && which.plots == 1)
-      which.plots <- all.plots
-
-    if(!all(which.plots %in% all.plots))
-      stop(sQuote("which"), " must be in 2:", length(choices))
-
-    if(length(which.plots) == 0)
-      return(invisible(x))
+    which.plots <- intersect(which.plots, all.plots)
 
     if(length(which.plots) > 1) {
       par.ask <- par(ask = TRUE)
       on.exit(par(ask = par.ask))
     }
+    which.plots <- c(which.plots, 0)
 
     ask <- FALSE
-    which.plots <- c(which.plots + 1, 1)
-  }
-
-  else if(which.plots == "all") {
-    which.plots <- c(all.plots + 1, 1)
-    ask <- FALSE
-    par.ask <- par(ask = TRUE)
-    on.exit(par(ask = par.ask))
   }
 
   else
     ask <- TRUE
 
   repeat {
-    if(ask) {
-      which.plots <- menu(tmenu,
-                          title = "\nMake plot selections (or 0 to exit):\n")
-
-      if(any(which.plots == 1)) {
-        which.plots <- c(all.plots, 0)
-        par.ask <- par(ask = TRUE)
-        on.exit(par(ask = par.ask))
-      }
-
-    which.plots <- which.plots + 1
-    }
+    if(ask)
+      which.plots <- menu(choices, title = "\nMake plot selections (or 0 to exit):")
 
     if(!length(which.plots))
       stop(paste("Invalid choice of plot in \'which.plots\'"))
 
-    for(pick in which.plots) {
+    for(pick in (1 + which.plots)) {
       switch(pick,
         return(invisible(x)),
-        place.holder <- 1,
 
         distancePlot.covfm(x,
                           xlab = "Index",
@@ -95,7 +72,7 @@ plot.covfm <- function(x, which.plots = "all", ...)
         
         screePlot.covfm(x,
                        xlab = "Principal Component",
-                       ylab = "Variances",
+                       ylab = "Variance",
                        main = "Screeplot",
                        ...),
 

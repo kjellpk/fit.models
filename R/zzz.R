@@ -1,7 +1,6 @@
-.onAttach <- function(libname, pkgname)
+.onLoad <- function(libname, pkgname)
 {
-  assign("fmreg", list(), envir = e)
-  
+  e$fmreg <- list()
 
   fmclass.register(fmclass = "lmfm",
                    classes = c("lm", "rlm"),
