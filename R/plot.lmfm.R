@@ -2,7 +2,6 @@
 #' 
 #' Produces a set of comparison diagnostic plots.  The plot options are
 #' \enumerate{
-#'   \item (not used)
 #'   \item Normal QQ Plot of Residuals,
 #'   \item Kernel Density Estimate of Residuals,
 #'   \item Residuals vs. Mahalanobis Distance,
@@ -16,10 +15,9 @@
 #'   }
 #' 
 #' @param x an \code{lmfm} object.
-#' @param which.plots either \code{"ask"}, \code{"all"}, or a vector of integer
-#' values specifying which plots to draw.  In the latter case, use the plot
-#' numbers given in the description above (or in the "ask" menu).  Any other
-#' values will be silently ignored.
+#' @param which.plots either \code{"ask"} (character string) or an integer
+#' vector specifying which plots to draw. In the later case, the plot numbers
+#' are given above.
 #' @param \dots additional parameters are ignored.
 #' @return \code{x} is invisibly returned.
 #' @section Side Effects: The selected plots are drawn on a graphics device.
@@ -57,53 +55,44 @@
 
 
 #' @export 
-plot.lmfm <- function(x, which.plots = "all", ...)
+plot.lmfm <- function(x, which.plots = 1:10, ...)
 {
-  choices <- c("All",
-    "Normal QQ Plot of Residuals", 
-    "Kernel Density Estimate of Residuals",
-    "Residuals vs. Mahalanobis Distance",
-    "Residuals vs. Fitted Values", 
-    "Sqrt Residuals vs. Fitted Values", 
-    "Response vs. Fitted Values", 
-    "Residuals vs. Index (Time)", 
-    "Overlaid Normal QQ Plot of Residuals", 
-    "Overlaid Kernel Density Estimate of Residuals")
+  if(length(which.plots) == 1 && casefold(which.plots) == "all")
+    which.plots <- 1:10
+
+  choices <- c("Normal QQ Plot of Residuals", 
+               "Kernel Density Estimate of Residuals",
+               "Residuals vs. Mahalanobis Distance",
+               "Residuals vs. Fitted Values", 
+               "Sqrt Residuals vs. Fitted Values", 
+               "Response vs. Fitted Values", 
+               "Residuals vs. Index (Time)", 
+               "Overlaid Normal QQ Plot of Residuals", 
+               "Overlaid Kernel Density Estimate of Residuals")
 
   is.simple.reg <- function(m)
     all(attr(m$terms, "dataClasses") == "numeric") && dim(model.frame(m))[2] == 2
 
-  if(all(sapply(x, is.simple.reg)))
+  if(all(sapply(x, is.simple.reg))) {
     choices <- c(choices, "Scatter Plot with Overlaid Fit(s)")
+    all.plots <- 1:10
+  }
+  else
+    all.plots <- 1:9
 
-  all.plots <- 2:length(choices)
-
-  tmenu <- paste("plot:", choices)
+  if(length(which.plots) == 0)
+    return(invisible(x))
 
   if(is.numeric(which.plots)) {
-    if(length(which.plots) == 1 && which.plots == 1)
-      which.plots <- all.plots
-
-    if(!all(which.plots %in% all.plots))
-      stop(sQuote("which"), " must be in 2:", length(choices))
-
-    if(length(which.plots) == 0)
-      return(invisible(x))
+    which.plots <- intersect(which.plots, all.plots)
 
     if(length(which.plots) > 1) {
       par.ask <- par(ask = TRUE)
       on.exit(par(ask = par.ask))
     }
+    which.plots <- c(which.plots, 0)
 
     ask <- FALSE
-    which.plots <- c(which.plots + 1, 1)
-  }
-
-  else if(which.plots == "all") {
-    which.plots <- c(all.plots + 1, 1)
-    ask <- FALSE
-    par.ask <- par(ask = TRUE)
-    on.exit(par(ask = par.ask))
   }
 
   else
@@ -116,24 +105,12 @@ plot.lmfm <- function(x, which.plots = "all", ...)
     colors <- 1:n.models
 
   repeat {
-    if(ask) {
-      which.plots <- menu(tmenu,
-        title = "\nMake plot selections (or 0 to exit):\n")
+    if(ask)
+      which.plots <- menu(choices, title = "\nMake plot selections (or 0 to exit):")
 
-      if(any(which.plots == 1)) {
-        which.plots <- c(all.plots, 0)
-        par.ask <- par(ask = TRUE)
-        on.exit(par(ask = par.ask))
-      }
-
-      which.plots <- which.plots + 1
-    }
-
-    for(pick in which.plots) {
+    for(pick in (1 + which.plots)) {
       switch(pick,
         return(invisible(x)),
-
-        place.holder <- 1,
 
         sideBySideQQPlot(x,
                          fun = residuals,

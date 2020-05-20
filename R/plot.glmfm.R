@@ -2,7 +2,6 @@
 #' 
 #' Produces a set of comparison diagnostic plots.  The plot options are
 #' \enumerate{
-#'   \item (not used)
 #'   \item Deviance Residuals vs. Predicted Values,
 #'   \item Response vs. Fitted Values,
 #'   \item Normal QQ Plot of Pearson Residuals,
@@ -12,10 +11,9 @@
 #' }
 #' 
 #' @param x a \code{glmfm} object.
-#' @param which.plots either \code{"ask"}, \code{"all"}, or a vector of integer
-#' values specifying which plots to draw.  In the latter case, use the plot
-#' numbers given in the description above (or in the "ask" menu).  Any other
-#' values will be silently ignored.
+#' @param which.plots either \code{"ask"} (character string) or an integer
+#' vector specifying which plots to draw. In the later case, the plot numbers
+#' are given above.
 #' @param \dots other parameters to be passed through to plotting functions.
 #' @return \code{x} is invisibly returned.
 #' @section Side Effects: The selected plots are drawn on a graphics device.
@@ -44,70 +42,48 @@
 #' @importFrom utils menu
 
 #' @export
-plot.glmfm <- function(x, which.plots = "all", ...)
+plot.glmfm <- function(x, which.plots = 1:6, ...)
 {
-  n.models <- length(x)
+  if(length(which.plots) == 1 && casefold(which.plots) == "all")
+    which.plots <- 1:6
 
-  choices <- c("All",
-               "Deviance Residuals vs. Predicted Values",
+  choices <- c("Deviance Residuals vs. Predicted Values",
                "Response vs. Fitted Values",
                "Normal QQ Plot of Pearson Residuals",
                "Normal QQ Plot of Deviance Residuals",
                "Pearson Residuals vs. Mahalanobis Distance",
                "Sqrt Deviance Residuals vs. Predicted Values")
 
-  all.plots <- 2:length(choices)
+  all.plots <- 1:6
 
-  tmenu <- paste("plot:", choices)
+  if(length(which.plots) == 0)
+    return(invisible(x))
 
   if(is.numeric(which.plots)) {
-    if(length(which.plots) == 1 && which.plots == 1)
-      which.plots <- all.plots
-
-    if(!all(which.plots %in% all.plots))
-      stop(sQuote("which"), " must be in 2:", length(choices))
-
-    if(length(which.plots) == 0)
-      return(invisible(x))
+    which.plots <- intersect(which.plots, all.plots)
 
     if(length(which.plots) > 1) {
       par.ask <- par(ask = TRUE)
       on.exit(par(ask = par.ask))
     }
+    which.plots <- c(which.plots, 0)
 
     ask <- FALSE
-    which.plots <- c(which.plots + 1, 1)
-  }
-
-  else if(which.plots == "all") {
-    which.plots <- c(all.plots + 1, 1)
-    ask <- FALSE
-    par.ask <- par(ask = TRUE)
-    on.exit(par(ask = par.ask))
   }
 
   else
     ask <- TRUE
 
   repeat {
-    if(ask) {
-      which.plots <- menu(tmenu,
-                          title = "\nMake plot selections (or 0 to exit):\n")
+    if(ask)
+      which.plots <- menu(choices, title = "\nMake plot selections (or 0 to exit):")
 
-      if(any(which.plots == 1)) {
-        which.plots <- c(all.plots, 0)
-        par.ask <- par(ask = TRUE)
-        on.exit(par(ask = par.ask))
-      }
+    if(!length(which.plots))
+      stop(paste("Invalid choice of plot in \'which.plots\'"))
 
-      which.plots <- which.plots + 1
-    }
-
-    for(pick in which.plots) {
+    for(pick in (1 + which.plots)) {
       switch(pick,
         return(invisible(x)),
-
-        place.holder <- 1,
 
         sideBySideScatterPlot(x,
                               x.fun = predict,
