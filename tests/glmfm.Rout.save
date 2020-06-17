@@ -1,7 +1,7 @@
 
-R version 3.3.3 (2017-03-06) -- "Another Canoe"
-Copyright (C) 2017 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin16.4.0 (64-bit)
+R Under development (unstable) (2020-06-15 r78700) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -40,9 +40,9 @@ trt: glm(formula = counts ~ treatment, family = poisson())
 out: glm(formula = counts ~ outcome, family = poisson())
 
 Coefficients:
-    (Intercept) treatment outcome2 outcome3
-trt      3.1645   -0.1810                  
-out      3.0445            -0.4543   -0.293
+    (Intercept) treatment2 treatment3 outcome2 outcome3
+trt      2.9957    -0.2231    -0.3567                  
+out      3.0445                        -0.4543   -0.293
 
 > print(fm1.sum <- summary(fm1, correlation = TRUE))
 
@@ -52,15 +52,18 @@ out: glm(formula = counts ~ outcome, family = poisson())
 
 Deviance Residuals:
          Min      1Q  Median     3Q   Max
-trt: -1.0652 -0.6356 -0.4014 0.8371 1.575
+trt: -1.1272 -0.6887 -0.4550 0.9622 1.506
 out: -0.9666 -0.6712 -0.1696 0.8472 1.049
 
 Coefficients:
                   Estimate Std. Error z value Pr(>|z|)    
-(Intercept): trt:   3.1645     0.2064  15.333   <2e-16 ***
+(Intercept): trt:   2.9957     0.1291  23.205   <2e-16 ***
              out:   3.0445     0.1260  24.165   <2e-16 ***
                                                           
-  treatment: trt:  -0.1810     0.1008  -1.795   0.0726 .  
+ treatment2: trt:  -0.2231     0.1936  -1.152   0.2492    
+             out:                                         
+                                                          
+ treatment3: trt:  -0.3567     0.2012  -1.773   0.0763 .  
              out:                                         
                                                           
    outcome2: trt:                                         
@@ -76,13 +79,14 @@ Null deviance:
   out: 10.58 on 8 degrees of freedom
 
 Residual deviance:
-  trt: 7.333 on 7 degrees of freedom
+  trt: 7.267 on 6 degrees of freedom
   out: 5.129 on 6 degrees of freedom
 
 Correlations:
 trt:
-          (Intercept)
-treatment -0.92      
+           (Intercept) treatment2
+treatment2 -0.67                 
+treatment3 -0.64        0.43     
 
 out:
          (Intercept) outcome2
@@ -290,4 +294,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  1.254   0.050   1.294 
+  1.815   0.164   2.149 

@@ -1,6 +1,6 @@
 Package: fit.models
-Version: 0.61
-Date: 2020-05-05
+Version: 0.62
+Date: 2020-06-17
 Title: Compare Fitted Models
 Description: The fit.models function and its associated methods (coefficients,
   print, summary, plot, etc.) were originally provided in the robust package to
