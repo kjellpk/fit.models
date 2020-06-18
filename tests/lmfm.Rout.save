@@ -91,6 +91,7 @@ Acid.Conc. -0.90       -0.34     0.00
 
 > 
 > pdf("fm1.pdf")
+> plot(fm1, 1)
 > plot(fm1, 2)
 > plot(fm1, 3)
 > plot(fm1, 4)
@@ -99,7 +100,6 @@ Acid.Conc. -0.90       -0.34     0.00
 > plot(fm1, 7)
 > plot(fm1, 8)
 > plot(fm1, 9)
-> plot(fm1, 10)
 > dev.off()
 null device 
           1 
@@ -179,6 +179,7 @@ Acid.Conc. -0.90       -0.34     0.00
 
 > 
 > pdf("fm2.pdf")
+> plot(fm2, 1)
 > plot(fm2, 2)
 > plot(fm2, 3)
 > plot(fm2, 4)
@@ -187,7 +188,6 @@ Acid.Conc. -0.90       -0.34     0.00
 > plot(fm2, 7)
 > plot(fm2, 8)
 > plot(fm2, 9)
-> plot(fm2, 10)
 > dev.off()
 null device 
           1 
@@ -263,6 +263,7 @@ Acid.Conc. -0.91       -0.39
 
 > 
 > pdf("fm3.pdf")
+> plot(fm3, 1)
 > plot(fm3, 2)
 > plot(fm3, 3)
 > plot(fm3, 4)
@@ -271,7 +272,6 @@ Acid.Conc. -0.91       -0.39
 > plot(fm3, 7)
 > plot(fm3, 8)
 > plot(fm3, 9)
-> plot(fm3, 10)
 > dev.off()
 null device 
           1 
@@ -349,6 +349,7 @@ Acid.Conc. -0.91       -0.39
 
 > 
 > pdf("fm4.pdf")
+> plot(fm4, 1)
 > plot(fm4, 2)
 > plot(fm4, 3)
 > plot(fm4, 4)
@@ -357,7 +358,6 @@ Acid.Conc. -0.91       -0.39
 > plot(fm4, 7)
 > plot(fm4, 8)
 > plot(fm4, 9)
-> plot(fm4, 10)
 > dev.off()
 null device 
           1 
@@ -422,6 +422,7 @@ Acid.Conc. -1.00
 
 > 
 > pdf("fm5.pdf")
+> plot(fm5, 1)
 > plot(fm5, 2)
 > plot(fm5, 3)
 > plot(fm5, 4)
@@ -431,7 +432,6 @@ Acid.Conc. -1.00
 > plot(fm5, 8)
 > plot(fm5, 9)
 > plot(fm5, 10)
-> plot(fm5, 11)
 > dev.off()
 null device 
           1 
@@ -447,4 +447,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  3.853   0.195   4.283 
+  4.624   0.241   5.293 

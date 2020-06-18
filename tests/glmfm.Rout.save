@@ -95,12 +95,12 @@ outcome3 -0.65        0.41
 
 > 
 > pdf("fm1.pdf")
+> plot(fm1, 1)
 > plot(fm1, 2)
 > plot(fm1, 3)
 > plot(fm1, 4)
 > plot(fm1, 5)
 > plot(fm1, 6)
-> plot(fm1, 7)
 > dev.off()
 null device 
           1 
@@ -186,12 +186,12 @@ TreatFT   -0.61        0.42
 
 > 
 > pdf("fm2.pdf")
+> plot(fm2, 1)
 > plot(fm2, 2)
 > plot(fm2, 3)
 > plot(fm2, 4)
 > plot(fm2, 5)
 > plot(fm2, 6)
-> plot(fm2, 7)
 > dev.off()
 null device 
           1 
@@ -273,12 +273,12 @@ TreatFT   -0.61        0.42
 
 > 
 > pdf("fm3.pdf")
+> plot(fm3, 1)
 > plot(fm3, 2)
 > plot(fm3, 3)
 > plot(fm3, 4)
 > plot(fm3, 5)
 > plot(fm3, 6)
-> plot(fm3, 7)
 > dev.off()
 null device 
           1 
@@ -294,4 +294,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  1.815   0.164   2.149 
+  2.083   0.167   2.410 
