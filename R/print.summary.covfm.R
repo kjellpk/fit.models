@@ -1,17 +1,18 @@
 #' @export
-print.summary.covfm <- function(x, digits = max(3, getOption("digits") - 3),
+print.summary.covfm <- function(x, corr = FALSE, digits = max(3, getOption("digits") - 3),
                                 print.distance = FALSE, ...)
 {
   n.models <- length(x)
   mod.names <- names(x)
+  acc <- if(corr) vcor else vcov
+  
+  calls <- lapply(x, display.call)
 
   cat("\nCalls: \n")
-  for(i in 1:n.models) {
-    cat(mod.names[i], ": ")
-    print(x[[i]]$call)
-  }
+  for(i in names(calls))
+    cat(paste0(i, ": ", calls[[i]], "\n"))
 
-  p <- dim(x[[1]]$cov)[1]
+  p <- dim(acc(x[[1]]))[1]
   i1 <- rep(seq(p), times = p)
   i2 <- rep(seq(p), each = p)
 
@@ -19,19 +20,19 @@ print.summary.covfm <- function(x, digits = max(3, getOption("digits") - 3),
   cov.index <- matrix(cov.index, p, p)
   cov.index <- cov.index[row(cov.index) >= col(cov.index)]
 
-  cov.unique <- t(sapply(x, function(u) u$cov[row(u$cov) >= col(u$cov)]))
+  cov.unique <- t(sapply(x, function(u) (v <- acc(u))[row(v) >= col(v)]))
   dimnames(cov.unique) <- list(mod.names, cov.index)
 
   cat("\nComparison of Covariance/Correlation Estimates:\n")
   cat(" (unique correlation terms) \n")
   print(cov.unique, digits = digits, ...)
 
-  center <- t(sapply(x, function(u) u$center))
-  center.names <- names(x[[1]]$center)
-  dimnames(center) <- list(mod.names, center.names)
+  loc <- t(sapply(x, center))
+  loc.names <- names(center(x[[1]]))
+  dimnames(loc) <- list(mod.names, loc.names)
 
   cat("\nComparison of center Estimates: \n")
-  print(center, digits = digits, ...)
+  print(loc, digits = digits, ...)
 
   evals <- t(sapply(x, function(u) u$evals))
   eval.names <- names(x[[1]]$evals)
