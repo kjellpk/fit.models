@@ -4,6 +4,10 @@ print.summary.covfm <- function(x, corr = FALSE, digits = max(3, getOption("digi
 {
   n.models <- length(x)
   mod.names <- names(x)
+
+  if(!("corr" %in% names(match.call())[-1]) && !is.null(ac <- attr(x, "corr")))
+    corr <- ac
+
   acc <- if(corr) vcor else vcov
   
   calls <- lapply(x, display.call)
