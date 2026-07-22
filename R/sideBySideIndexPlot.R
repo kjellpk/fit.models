@@ -28,7 +28,7 @@ sideBySideIndexPlot <- function(x, fun, level = 0.95, id.n = 3, ...)
   n.y <- sapply(y, length)
 
   s <- numeric(n.models)
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     if(is.null(x[[i]]$scale))
       s[i] <- sqrt(sum(y[[i]]^2) / x[[i]]$df.residual)
     else
@@ -39,7 +39,7 @@ sideBySideIndexPlot <- function(x, fun, level = 0.95, id.n = 3, ...)
 
   if(all(sapply(indices, class) == "integer")) {
     newx <- min(unlist(indices)):max(unlist(indices))
-    for(i in 1:n.models) {
+    for(i in seq_len(n.models)) {
       newy <- rep(as.numeric(NA), length(newx))
       newy[indices[[i]]] <- y[[i]]
       indices[[i]] <- newx
@@ -52,7 +52,7 @@ sideBySideIndexPlot <- function(x, fun, level = 0.95, id.n = 3, ...)
 
   n.y <- sapply(y, length)
 
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     y[[i]] <- c(s[i], y[[i]])
     indices[[i]] <- c(NA, indices[[i]])
   }

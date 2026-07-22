@@ -100,9 +100,9 @@ plot.lmfm <- function(x, which.plots = 1:10, ...)
 
   n.models <- length(x)
   if(n.models <= 3)
-    colors <- c("black", "blue", "purple")[1:n.models]
+    colors <- c("black", "blue", "purple")[seq_len(n.models)]
   else
-    colors <- 1:n.models
+    colors <- seq_len(n.models)
 
   repeat {
     if(ask)

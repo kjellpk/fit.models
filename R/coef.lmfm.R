@@ -10,7 +10,7 @@ coef.lmfm <- function(object, ...)
 
   coefmat <- matrix(NA, n.models, length(coef.names))
   dimnames(coefmat) <- list(mod.names, coef.names)
-  for(i in 1:n.models)
+  for(i in seq_len(n.models))
     coefmat[i, names(coefs[[i]])] <- coefs[[i]]
 
   coefmat

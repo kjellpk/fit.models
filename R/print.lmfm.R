@@ -5,7 +5,7 @@ print.lmfm <- function(x, digits = max(3, getOption("digits") - 3), ...)
   fancy.names <- format(paste(names(x), ":", sep = ""), justify = "right")
 
   cat("\nCalls:\n")
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     cat(fancy.names[i], " ", sep = "")
     print(x[[i]]$call, ...)
   }

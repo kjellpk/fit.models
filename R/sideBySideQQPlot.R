@@ -59,7 +59,7 @@ sideBySideQQPlot <- function(x, fun, envelope = TRUE, half.normal = FALSE,
   n.res <- sapply(res, length)
 
   px <- py <- list()
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     tmp <- qqnorm(res[[i]], plot.it = FALSE)
     px[[i]] <- tmp$x
     py[[i]] <- tmp$y
@@ -69,13 +69,13 @@ sideBySideQQPlot <- function(x, fun, envelope = TRUE, half.normal = FALSE,
     py <- lapply(py, abs)
     px <- lapply(n.res, function (u) .5 + (0:(u-1)) / (2*u))
     px <- lapply(px, qnorm)
-    for(i in 1:n.models)
+    for(i in seq_len(n.models))
       px[[i]][order(py[[i]])] <- px[[i]]
   }
 
   if(envelope) {
     sigma.hats <- numeric(n.models)
-    for(i in 1:n.models) {
+    for(i in seq_len(n.models)) {
       if(!is.null(x[[i]]$scale))
         sigma.hats[i] <- x[[i]]$scale
       else {
@@ -90,7 +90,7 @@ sideBySideQQPlot <- function(x, fun, envelope = TRUE, half.normal = FALSE,
     }
 
     env <- list()
-    for(i in 1:n.models)
+    for(i in seq_len(n.models))
       env[[i]] <- confidence.envelope(n.res[i], sigma.hats[i], n.samples,
                                       level, half.normal)
     lower <- lapply(env, function(u) u$lower)

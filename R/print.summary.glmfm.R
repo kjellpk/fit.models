@@ -10,7 +10,7 @@ print.summary.glmfm <- function(x, digits = max(3, getOption("digits") - 3),
   fancy.names <- format(paste(mod.names, ":", sep = ""), justify = "right")
 
   cat("\nCalls:\n")
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     cat(fancy.names[i], " ", sep = "")
     print(x[[i]]$call, ...)
   }
@@ -36,7 +36,7 @@ print.summary.glmfm <- function(x, digits = max(3, getOption("digits") - 3),
   rownames(coefmat) <- format(r.names, justify = "right")
   colnames(coefmat) <- c("Estimate", "Std. Error", "z value", "Pr(>|z|)")
 
-  for(i in 1:n.models)
+  for(i in seq_len(n.models))
     coefmat[idx + (i-1), ][cnames %in% row.names(coefs[[i]]), ] <- coefs[[i]]
 
   cat("\nCoefficients:\n")
@@ -74,7 +74,7 @@ print.summary.glmfm <- function(x, digits = max(3, getOption("digits") - 3),
   if(all(!sapply(correlations, is.null))) {    
     if(any(sapply(correlations, NCOL) > 1)) {
       cat("Correlations:\n")
-      for(i in 1:n.models) {
+      for(i in seq_len(n.models)) {
         if((p <- NCOL(correlations[[i]])) > 1) {        
           correl <- format(round(correlations[[i]], 2), nsmall = 2,
                            digits = digits, ...)

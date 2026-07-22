@@ -28,7 +28,7 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...)
 
   thresh <- qchisq(level, df = p)
 
-  for(i in 1:n.models)
+  for(i in seq_len(n.models))
     dists[[i]] <- c(thresh[i], dists[[i]])
 
   panel.special <- function(x, y, id.n, ...) {

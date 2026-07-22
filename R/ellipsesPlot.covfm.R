@@ -51,7 +51,7 @@ ellipsesPlot.covfm <- function(x, ...)
     y.min <- Inf
     y.max <- -Inf
 
-    for(i in 1:n.models) {
+    for(i in seq_len(n.models)) {
       z[[i]] <- ellipse(center(x[[i]]), vcov(x[[i]]))
       x.min <- min(x.min, z[[i]][,1])
       x.max <- max(x.max, z[[i]][,1])
@@ -90,11 +90,11 @@ ellipsesPlot.covfm <- function(x, ...)
          pch = 16,
          asp = 1)
 
-    for(i in 1:length(z))
+    for(i in seq_along(z))
       polygon(z[[i]], density = 0, lty = i, col = i, lwd = 2)
 
     pos <- ifelse(vcov(x[[1]])[1,2] > 0, "topleft", "topright")
-    legend(x = pos, legend = mod.names, col = 1:n.models, lty = 1:n.models,
+    legend(x = pos, legend = mod.names, col = seq_len(n.models), lty = seq_len(n.models),
            lwd = 2, bty = "n")
   }
 
@@ -131,10 +131,10 @@ ellipsesPlot.covfm <- function(x, ...)
     wt.corr <- strwidth("-0.00", units = "user")
     cex.corr <- min(c(0.75 / max(c(ht.corr, wt.corr)), 1.25))
 
-    vert <- (1:n.models) * 1.6
+    vert <- (seq_len(n.models)) * 1.6
     vert <- vert - mean(vert) + 0.5
 
-    for(k in 1:n.models) {
+    for(k in seq_len(n.models)) {
       s <- sqrt(diag(vcov(x[[k]])))
       X <- vcov(x[[k]]) / (s %o% s)
 
@@ -186,8 +186,8 @@ ellipsesPlot.covfm <- function(x, ...)
     legend(x = "bottomright",
            legend = mod.names,
            lwd = n.models:1,
-           col = 1:n.models,
-           lty = 1:n.models,
+           col = seq_len(n.models),
+           lty = seq_len(n.models),
            bty = "n",
            horiz = TRUE)
   }

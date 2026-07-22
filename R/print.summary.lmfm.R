@@ -10,7 +10,7 @@ print.summary.lmfm <- function(x, digits = max(3, getOption("digits") - 3),
   fancy.names <- format(paste(mod.names, ":", sep = ""), justify = "right")
 
   cat("\nCalls:\n")
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     cat(fancy.names[i], " ", sep = "")
     print(x[[i]]$call, ...)
   }
@@ -32,7 +32,7 @@ print.summary.lmfm <- function(x, digits = max(3, getOption("digits") - 3),
   rownames(coefmat) <- format(r.names, justify = "right")
   colnames(coefmat) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
 
-  for(i in 1:n.models) {
+  for(i in seq_len(n.models)) {
     mc <- coefs[[i]]
     coefmat[idx + (i-1), ][cnames %in% row.names(mc), 1:ncol(mc)] <- mc
   }
@@ -42,7 +42,7 @@ print.summary.lmfm <- function(x, digits = max(3, getOption("digits") - 3),
                na.print = "", ...)
 
   cat("\nResidual Scale Estimates:\n")
-  for(i in 1:n.models)
+  for(i in seq_len(n.models))
     cat(fancy.names[i], format(x[[i]]$sigma, digits = digits, ...), "on",
         x[[i]]$df[2], "degrees of freedom\n")
 
@@ -60,7 +60,7 @@ print.summary.lmfm <- function(x, digits = max(3, getOption("digits") - 3),
   if(all(!sapply(correlations, is.null))) {    
     if(any(sapply(correlations, NCOL) > 1)) {
       cat("Correlations:\n")
-      for(i in 1:n.models) {
+      for(i in seq_len(n.models)) {
         if((p <- NCOL(correlations[[i]])) > 1) {        
           correl <- format(round(correlations[[i]], 2), nsmall = 2,
                            digits = digits, ...)

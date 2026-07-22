@@ -44,7 +44,7 @@ ddPlot.covfm <- function(x, level = 0.95, strip = "", id.n = 3, ...)
       if(id.n > 0) {
         out <- which(x > thresh[1] | y > thresh[2])
         id.n <- ifelse(length(out) > id.n, id.n, length(out))
-        out <- out[order(x[out]^2 + y[out]^2, decreasing = TRUE)][1:id.n]
+        out <- out[order(x[out]^2 + y[out]^2, decreasing = TRUE)][seq_len(id.n)]
 
         if(length(out))
           panel.text(x[out], y[out], paste(" ", out, sep = ""), adj = 0)

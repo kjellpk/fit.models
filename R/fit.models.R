@@ -124,7 +124,7 @@ fit.models <- function(model.list, ...)
     model.call <- fm.call
     model.call$model.list <- NULL
 
-    for(i in 1:n.models) {
+    for(i in seq_len(n.models)) {
       model.call[[1]] <- as.name(model.list[[i]])
       model.list[[i]] <- eval(model.call, sys.parent())
     }

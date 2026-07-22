@@ -26,7 +26,7 @@ screePlot.covfm <- function(x, npcs, strip = "", ...)
   if(missing(npcs))
     npcs <- min(10, max(sapply(evals, length)))
 
-  for(i in 1:n.models)
+  for(i in seq_len(n.models))
     if(length(evals[[i]]) > npcs)
       evals[[i]] <- evals[[i]][1:npcs]
 

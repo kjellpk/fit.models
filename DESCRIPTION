@@ -15,4 +15,4 @@ Maintainer: Kjell Konis <kjellk@gmail.com>
 Imports: lattice, stats
 Suggests: MASS
 License: GPL
-RoxygenNote: 7.1.0
+Config/roxygen2/version: 8.0.0
