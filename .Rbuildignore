@@ -1,7 +1,6 @@
 ^.*\.code-workspace$
-.vscode$
 tweekNAMESPACE.R
 scratch.R
 fit.models_*.tar.gz
-
-
+.git
+.gitignore
