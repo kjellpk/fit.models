@@ -41,6 +41,7 @@
 #' @importFrom graphics par
 #' @importFrom utils menu
 
+#' @rawNamespace export(plot.glmfm)
 #' @export
 plot.glmfm <- function(x, which.plots = 1:6, ...)
 {
