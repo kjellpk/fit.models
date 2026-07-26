@@ -1,16 +1,21 @@
 #' Ellipses Plot - Visual Correlation Matrix Comparison
 #'
-#' @description When there are 3 or more variables in the data, this function produces
-#'              a matrix with ellipses drawn in the upper triangle.  The ellipse in cell
-#'              \eqn{i,j} of the plot is drawn to be a contour of a standard bivariate
-#'              normal with correlation \eqn{\rho_{ij}}.  One ellipse is drawn in each
-#'              cell for each model in the \code{covfm} object.  When there are 2
-#'              variables in the data, this function produces a scatter plot of the data
-#'              with an overlaid 95\% confidence ellipse for each model in the
-#'              \code{covfm} object.
+#' @description
+#'   When there are 3 or more variables in the data, this function produces
+#'  a matrix with ellipses drawn in the upper triangle.  The ellipse in cell
+#'  \eqn{i,j} of the plot is drawn to be a contour of a standard bivariate
+#'  normal with correlation \eqn{\rho_{ij}}.  One ellipse is drawn in each
+#'  cell for each model in the \code{covfm} object.  When there are 2
+#'  variables in the data, this function produces a scatter plot of the data
+#'  with an overlaid 95\% confidence ellipse for each model in the
+#'  \code{covfm} object.
 #'
 #' @param x a \code{"covfm"} object.
-#' @param \dots additional arguments are ignored.
+#'
+#' @param \dots
+#'   \code{col}, \code{lty}, and \code{lwd} are passed to polygon when drawing
+#'   the ellipses. A vector of length 1 is applied to each ellipse. Otherwise,
+#'   a vector with length equal to the number of models in \code{x}.
 #'
 #' @return x is invisibly returned.
 #'
@@ -21,6 +26,11 @@ ellipsesPlot.covfm <- function(x, ...)
 {
   n.models <- length(x)
   mod.names <- names(x)
+
+  dots <- list(...)
+  colors <- par_from_dots("col", dots, n.models, mod.names)
+  line_types <- par_from_dots("lty", dots, n.models, mod.names)
+  line_widths <- par_from_dots("lwd", dots, n.models, mod.names)
 
   p <- dim(vcov(x[[1]]))[1]
 
@@ -91,11 +101,12 @@ ellipsesPlot.covfm <- function(x, ...)
          asp = 1)
 
     for(i in seq_along(z))
-      polygon(z[[i]], density = 0, lty = i, col = i, lwd = 2)
+      polygon(z[[i]], density = 0, lty = line_types[[i]],
+              col = colors[[i]], lwd = line_widths[[i]])
 
     pos <- ifelse(vcov(x[[1]])[1,2] > 0, "topleft", "topright")
-    legend(x = pos, legend = mod.names, col = seq_len(n.models), lty = seq_len(n.models),
-           lwd = 2, bty = "n")
+    legend(x = pos, legend = mod.names, col = colors, lty = line_types,
+           lwd = line_widths, bty = "n")
   }
 
   ## if p > 2 plot matrix of ellipses ##
@@ -153,9 +164,9 @@ ellipsesPlot.covfm <- function(x, ...)
       polygon(x = as.vector(xs),
               y = as.vector(ys),
               density = 0,
-              lwd = n.models - k + 1,
-              col = k,
-              lty = k)
+              lwd = line_widths[[k]],
+              col = colors[[k]],
+              lty = line_types[[k]])
 
       corr <- X[lt]
       corr[corr > 0.99 & corr < 1.00] <- 0.99
@@ -166,7 +177,7 @@ ellipsesPlot.covfm <- function(x, ...)
            yc[lt],
            labels = corr,
            adj = c(1.0, vert[k]),
-           col = k,
+           col = colors[[k]],
            cex = cex.corr)
     }
 
@@ -185,14 +196,12 @@ ellipsesPlot.covfm <- function(x, ...)
 
     legend(x = "bottomright",
            legend = mod.names,
-           lwd = n.models:1,
-           col = seq_len(n.models),
-           lty = seq_len(n.models),
+           lwd = line_widths,
+           col = colors,
+           lty = line_types,
            bty = "n",
            horiz = TRUE)
   }
 
   invisible(x)
 }
-
-
