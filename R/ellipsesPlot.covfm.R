@@ -28,9 +28,9 @@ ellipsesPlot.covfm <- function(x, ...)
   mod.names <- names(x)
 
   dots <- list(...)
-  colors <- par_from_dots("col", dots, n.models, mod.names)
-  line_types <- par_from_dots("lty", dots, n.models, mod.names)
-  line_widths <- par_from_dots("lwd", dots, n.models, mod.names)
+  colors <- par_from_dots("col", dots, mod.names)
+  line_types <- par_from_dots("lty", dots, mod.names)
+  line_widths <- par_from_dots("lwd", dots, mod.names)
 
   p <- dim(vcov(x[[1]]))[1]
 

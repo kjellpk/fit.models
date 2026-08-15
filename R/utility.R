@@ -12,22 +12,21 @@ display.call <- function(object)
 
 
 
-par_from_dots <- function(par_name, dots, n.models, mod.names) {
-  if (is.null(u <- dots[[par_name]])) {
-    u <- stats::setNames(seq_len(n.models), mod.names)
-  } else {
-    if (length(u) == 1L && n.models > 1L) {
-      u <- stats::setNames(rep(u, n.models), mod.names)
-    } else if (length(u) == n.models) {
+par_from_dots <- function(par_name, dots, mod.names) {
+  if (!is.null(u <- dots[[par_name]])) {
+    if (length(u) == 1L && length(mod.names) > 1L) {
+      u <- stats::setNames(rep(u, length(mod.names)), mod.names)
+    } else if (length(u) == length(mod.names)) {
       if (is.null(names(u))) {
         names(u) <- mod.names
       } else {
         u <- u[mod.names]
       }
-    } else {
-      stop("syntax error: 'col'")
+    }
+    if (!anyNA(u)) {
+      return(u)
     }
   }
 
-  u
+  stats::setNames(seq_along(mod.names), mod.names)
 }
