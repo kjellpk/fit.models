@@ -1,17 +1,22 @@
 #' Comparison Screeplot
-#' 
+#'
 #' @description Overlaid screeplot for the models in a \dQuote{covfm} object.
 #'
-#' @param x a \code{"covfm"} object.
-#' 
-#' @param npcs a postive integer value specifying the number of components to be plotted.
-#' 
-#' @param strip a character string printed in the \dQuote{strip} at the top of the plot.
-#' 
-#' @param ... additional arguments are passed to \code{xyplot}.
+#' @param x
+#'   a \code{"covfm"} object.
 #'
-#' @return the \code{trellis} object is invisibly returned.
-#' 
+#' @param npcs
+#'   a postive integer value specifying the number of components to be plotted.
+#'
+#' @param strip
+#'   a character string printed in the \dQuote{strip} at the top of the plot.
+#'
+#' @param ...
+#'   additional arguments are passed to \code{xyplot}.
+#'
+#' @return
+#'   the \code{trellis} object is invisibly returned.
+#'
 #' @export
 screePlot.covfm <- function(x, npcs, strip = "", ...)
 {
@@ -19,45 +24,55 @@ screePlot.covfm <- function(x, npcs, strip = "", ...)
   mod.names <- names(x)
   dots <- list(...)
 
-  eval.extractor <- function(u)
+  pars <- stats::setNames(nm = c("col", "lty", "lwd"))
+  pars <- lapply(pars, par_from_dots, dots = dots, mod.names = mod.names)
+  dots[names(pars)] <- NULL
+
+  if (is.null(dots$pch)) {
+    dots$pch <- 16
+  }
+
+  evals <- lapply(x, function(u) {
     eigen(vcov(u), symmetric = TRUE, only.values = TRUE)$values
-  evals <- lapply(x, eval.extractor)
-  
-  if(missing(npcs))
-    npcs <- min(10, max(sapply(evals, length)))
+  })
 
-  for(i in seq_len(n.models))
-    if(length(evals[[i]]) > npcs)
+  if (missing(npcs)) {
+    npcs <- min(10, max(vapply(evals, length, -1L)))
+  }
+
+  for (i in seq_len(n.models)) {
+    if (length(evals[[i]]) > npcs) {
       evals[[i]] <- evals[[i]][1:npcs]
+    }
+  }
 
-  n.evals <- sapply(evals, length)
+  n.evals <- vapply(evals, length, -1L)
 
   tdf <- data.frame(evals = unlist(evals),
-                    index = unlist(lapply(n.evals, function(u) 1:u)),
+                    index = sequence(n.evals),
                     mod = factor(rep(mod.names, n.evals), levels = mod.names))
 
-  key <- simpleKey(text = mod.names, lines = TRUE, x = 0.95, y = 0.925, corner = c(1, 1), ...)
+  key <- simpleKey(text = mod.names, points = FALSE, lines = TRUE,
+                   x = 0.95, y = 0.925, corner = c(1, 1))
 
-  if(!is.null(pch <- dots$pch) && length(pch) == n.models)
-    key$points$pch <- pch
+  key$lines[names(pars)] <- pars
 
   x.scale <- list(x = list(at = 1:npcs,
                            labels = paste("Comp", 1:npcs, sep = ".")))
 
-  p <- xyplot(evals ~ index | strip,
-              data = tdf,
-              groups = mod,
-              strip = function(...) strip.default(..., style = 1),
-              type = "b",
-              key = key,
-              scales = x.scale,
-              ...)
+  xyplot_args <- list(evals ~ index | strip,
+                      data = tdf,
+                      groups = tdf$mod,
+                      strip = function(...) strip.default(..., style = 1),
+                      type = "b",
+                      key = key,
+                      scales = x.scale)
 
-  print(p)
+  xyplot_args <- c(xyplot_args, pars, dots)
+
+  print(p <- do.call(xyplot, xyplot_args))
   invisible(p)
 }
 
 
 utils::globalVariables(c("mod"))
-
-
