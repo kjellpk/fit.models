@@ -1,6 +1,6 @@
 Package: fit.models
-Version: 0.64
-Date: 2026-07-21
+Version: 0.75
+Date: 2026-08-15
 Title: Compare Fitted Models
 Description: The fit.models function and its associated methods (coefficients, print,
   summary, plot, etc.) were originally provided in the robust package to compare robustly
@@ -15,4 +15,4 @@ Maintainer: Kjell Konis <kjellk@gmail.com>
 Imports: lattice, stats
 Suggests: MASS
 License: GPL
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
