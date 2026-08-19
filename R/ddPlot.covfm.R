@@ -1,37 +1,43 @@
 #' Distance - Distance Plot
 #'
-#' @description For a \code{covfm} object containing 2 models, this function plots the
-#'              Mahalanobis distance from the first model on the y-axis and the
-#'              Mahalanobis distance from the second model on the x-axis.
+#' @description
+#'   For a \code{covfm} object containing 2 models, this function plots the
+#'   Mahalanobis distance from the first model on the y-axis and the
+#'   Mahalanobis distance from the second model on the x-axis.
 #'
-#' @param x a \code{"covfm"} object.
-#' 
-#' @param level a single numeric value between 0 and 1 giving the
-#'              chi-squared percent point used to compute the outlyingness threshold.
+#' @param x
+#'   a \code{"covfm"} object.
 #'
-#' @param strip a character string printed in the \dQuote{strip} at the top
-#'              of the plot.
+#' @param level
+#'   a single numeric value between 0 and 1 giving the
+#'   chi-squared percent point used to compute the outlyingness threshold.
 #'
-#' @param id.n a single nonnegative integer specifying the number of
-#'             extreme points to label in the plot.
-#' 
-#' @param ... additional arguments are passed to \code{xyplot}.
+#' @param strip
+#'   a character string printed in the \dQuote{strip} at the top
+#'   of the plot.
 #'
-#' @return if the models can be compared then the plotted \code{trellis} object is
-#'         invisibly returned.  Otherwise \code{x} is returned invisibly.
+#' @param id.n
+#'   a single nonnegative integer specifying the number of
+#'   extreme points to label in the plot.
+#'
+#' @param ...
+#'   additional arguments are passed to \code{xyplot}.
+#'
+#' @return if the models can be compared then the plotted \code{trellis}
+#'         object is invisibly returned.  Otherwise \code{x} is returned
+#'         invisibly.
 #'
 #' @export
 ddPlot.covfm <- function(x, level = 0.95, strip = "", id.n = 3, ...)
 {
   n.models <- length(x)
   mod.names <- names(x)
-         
-  if(n.models == 2) {
-    p <- sapply(x, function(u) dim(u$cov)[1])
-    n <- length(x[[1]]$dist)
 
-    tdf <- data.frame(x = sqrt(x[[2]]$dist), 
-                      y = sqrt(x[[1]]$dist))
+  if (n.models == 2L) {
+    p <- vapply(x, function(u) dim(u$cov)[[1L]], -1L)
+
+    tdf <- data.frame(x = sqrt(x[[2L]]$dist),
+                      y = sqrt(x[[1L]]$dist))
 
     prepanel.special <- function(x, y, thresh) {
       lim <- c(0.0, max(c(x, y, 1.25 * thresh)))
@@ -39,15 +45,18 @@ ddPlot.covfm <- function(x, level = 0.95, strip = "", id.n = 3, ...)
     }
 
     panel.special <- function(x, y, thresh, id.n, ...) {
-      panel.xyplot(x, y, ...)
+      dots <- list(...)
+      dots$col <- NULL
+      do.call(panel.xyplot, c(list(x = x, y = y), dots))
 
       if(id.n > 0) {
         out <- which(x > thresh[1] | y > thresh[2])
         id.n <- ifelse(length(out) > id.n, id.n, length(out))
         out <- out[order(x[out]^2 + y[out]^2, decreasing = TRUE)][seq_len(id.n)]
 
-        if(length(out))
+        if (length(out)) {
           panel.text(x[out], y[out], paste(" ", out, sep = ""), adj = 0)
+        }
       }
 
       panel.abline(h = thresh[2], lty = 2)
@@ -73,5 +82,3 @@ ddPlot.covfm <- function(x, level = 0.95, strip = "", id.n = 3, ...)
 
   invisible(x)
 }
-
-

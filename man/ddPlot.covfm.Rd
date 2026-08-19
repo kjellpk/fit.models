@@ -21,11 +21,12 @@ extreme points to label in the plot.}
 \item{...}{additional arguments are passed to \code{xyplot}.}
 }
 \value{
-if the models can be compared then the plotted \code{trellis} object is
-        invisibly returned.  Otherwise \code{x} is returned invisibly.
+if the models can be compared then the plotted \code{trellis}
+        object is invisibly returned.  Otherwise \code{x} is returned
+        invisibly.
 }
 \description{
 For a \code{covfm} object containing 2 models, this function plots the
-             Mahalanobis distance from the first model on the y-axis and the
-             Mahalanobis distance from the second model on the x-axis.
+  Mahalanobis distance from the first model on the y-axis and the
+  Mahalanobis distance from the second model on the x-axis.
 }

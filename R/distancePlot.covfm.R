@@ -23,13 +23,14 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...)
   mod.names <- names(x)
 
   dists <- lapply(x, function(u) u$dist)
-  n <- sapply(dists, length)
+  n <- lengths(dists)
   p <- sapply(x, function(u) nrow(u$cov))
 
   thresh <- qchisq(level, df = p)
 
-  for(i in seq_len(n.models))
+  for (i in seq_len(n.models)) {
     dists[[i]] <- c(thresh[i], dists[[i]])
+  }
 
   panel.special <- function(x, y, id.n, ...) {
     x <- x[-1]
@@ -39,10 +40,12 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...)
     out <- which(y > vt)
     id.n <- min(id.n, length(out))
 
-    panel.xyplot(x, y, ...)
+    dots <- list(...)
+    dots$col <- NULL
+    do.call(panel.xyplot, c(list(x = x, y = y), dots))
 
-    if(id.n > 0) {
-      out <- order(y)[(n-id.n+1):n]
+    if (id.n > 0 && n > id.n) {
+      out <- order(y, decreasing = TRUE)[seq_len(id.n)]
       panel.text(x[out], y[out], paste(" ", out, sep = ""), adj = 0)
     }
 
@@ -67,4 +70,3 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...)
   print(p)
   invisible(p)
 }
-
