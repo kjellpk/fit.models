@@ -69,8 +69,8 @@ ellipsesPlot.covfm <- function(x, ...)
       y.max <- max(y.max, z[[i]][,2])
     }
 
-    X <- try(eval(x[[1]]$call$data, envir = sys.parent(2)), silent = TRUE)
-    if(!is.null(X) && !inherits(X, "try-error")) {
+    X <- try(eval(x[[1L]]$call[[2L]], envir = sys.parent(2)), silent = TRUE)
+    if (!is.null(X) && !inherits(X, "try-error")) {
       X <- as.matrix(X)
       x.min <- min(x.min, X[,1])
       x.max <- max(x.max, X[,1])
@@ -96,7 +96,7 @@ ellipsesPlot.covfm <- function(x, ...)
          xlab = names(center(x[[1]]))[1],
          ylab = names(center(x[[1]]))[2],
          main = header,
-         col = "lightgray",
+         col = "black",
          pch = 16,
          asp = 1)
 
