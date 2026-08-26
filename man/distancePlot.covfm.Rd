@@ -22,6 +22,6 @@ the \code{trellis} object is invisibly returned.
 }
 \description{
 Produces side-by-side plots of Mahalanobis distance computed using the
-             location and covariance matrix estimates contained in each element of a
-             \code{covfm} object.
+  location and covariance matrix estimates contained in each element of a
+  \code{covfm} object.
 }

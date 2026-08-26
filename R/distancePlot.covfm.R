@@ -1,50 +1,46 @@
 #' Side-by-Side Mahalanobis Distance Plot
-#' 
-#' @description Produces side-by-side plots of Mahalanobis distance computed using the
-#'              location and covariance matrix estimates contained in each element of a
-#'              \code{covfm} object.
 #'
-#' @param x a \code{"covfm"} object.
-#' 
-#' @param level a single numeric value between 0 and 1 giving the chi-squared percent
-#'              point used to compute the outlyingness threshold.
-#'              
-#' @param id.n a single nonnegative integer specifying the number of extreme points to
-#'             label in the plot.
-#'             
-#' @param \dots additional arguments are passed to \code{xyplot}.
+#' @description
+#'   Produces side-by-side plots of Mahalanobis distance computed using the
+#'   location and covariance matrix estimates contained in each element of a
+#'   \code{covfm} object.
 #'
-#' @return the \code{trellis} object is invisibly returned.
+#' @param x
+#'   a \code{"covfm"} object.
+#'
+#' @param level
+#'   a single numeric value between 0 and 1 giving the chi-squared percent
+#'   point used to compute the outlyingness threshold.
+#'
+#' @param id.n
+#'   a single nonnegative integer specifying the number of extreme points to
+#'   label in the plot.
+#'
+#' @param \dots
+#'   additional arguments are passed to \code{xyplot}.
+#'
+#' @return
+#'   the \code{trellis} object is invisibly returned.
 #'
 #' @export
-distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...)
-{
+distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...) {
   n.models <- length(x)
   mod.names <- names(x)
 
   dists <- lapply(x, function(u) u$dist)
   n <- lengths(dists)
-  p <- sapply(x, function(u) nrow(u$cov))
+  p <- vapply(x, function(u) length(u$center), -1L)
 
-  thresh <- qchisq(level, df = p)
+  thresh <- setNames(qchisq(level, df = p), mod.names)
 
-  for (i in seq_len(n.models)) {
-    dists[[i]] <- c(thresh[i], dists[[i]])
-  }
-
-  panel.special <- function(x, y, id.n, ...) {
-    x <- x[-1]
-    vt <- y[1]
-    y <- y[-1]
-    n <- length(y)
-    out <- which(y > vt)
+  panel.special <- function(x, y, subscripts, id.n, ...) {
+    lvl <- as.character(tdf[[subscripts[[1L]],"mod"]])
+    out <- which(y > (vt <- thresh[[lvl]]))
     id.n <- min(id.n, length(out))
 
-    dots <- list(...)
-    dots$col <- NULL
-    do.call(panel.xyplot, c(list(x = x, y = y), dots))
+    panel.xyplot(x = x, y = y, ...)
 
-    if (id.n > 0 && n > id.n) {
+    if (id.n > 0) {
       out <- order(y, decreasing = TRUE)[seq_len(id.n)]
       panel.text(x[out], y[out], paste(" ", out, sep = ""), adj = 0)
     }
@@ -53,10 +49,17 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...)
     invisible()
   }
 
-  mod <- factor(rep(mod.names, n+1), levels = mod.names)
+  mod <- factor(rep(mod.names, n), levels = mod.names)
+
+  indices <- unlist(lapply(dists, names), recursive = FALSE, use.names = FALSE)
+  if (!anyNA(dates <- as.Date(indices, optional = TRUE))) {
+    indices <- dates
+  } else {
+    indices <- sequence(n)
+  }
 
   tdf <- data.frame(dists = sqrt(unlist(dists)),
-                    index = unlist(lapply(n, function(u) 0:u)),
+                    index = indices,
                     mod = mod)
 
   p <- xyplot(dists ~ index | mod,
