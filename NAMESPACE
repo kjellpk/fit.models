@@ -78,6 +78,7 @@ importFrom(stats,
   quantile,
   residuals,
   rnorm,
+  setNames,
   terms,
   var,
   vcov

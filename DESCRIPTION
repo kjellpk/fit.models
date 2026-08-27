@@ -12,7 +12,7 @@ Description: The fit.models function and its associated methods (coefficients, p
 Authors@R: person("Kjell", "Konis", role = c("aut", "cre"), email = "kjellk@gmail.com")
 Author: Kjell Konis [aut, cre]
 Maintainer: Kjell Konis <kjellk@gmail.com>
-Imports: lattice, stats
+Imports: graphics, lattice, stats, utils
 Suggests: MASS
 License: GPL
 Config/roxygen2/version: 8.1.0
