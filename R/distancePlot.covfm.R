@@ -31,6 +31,7 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...) {
   n <- lengths(dists)
   p <- vapply(x, function(u) length(u$center), -1L)
 
+  #' @importFrom stats setNames
   thresh <- setNames(qchisq(level, df = p), mod.names)
 
   panel.special <- function(x, y, subscripts, id.n, ...) {
