@@ -206,7 +206,8 @@ ellipsesPlot.covfm <- function(x, ...)
            col = colors,
            lty = line_types,
            bty = "n",
-           horiz = TRUE)
+           horiz = TRUE,
+           cex = ifelse(is.null(tmp <- dots$cex.legend), 1, tmp))
   }
 
   invisible(x)
