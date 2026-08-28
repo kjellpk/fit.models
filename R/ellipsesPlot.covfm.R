@@ -140,7 +140,7 @@ ellipsesPlot.covfm <- function(x, ...)
 
     ht.corr <- (1.5 * n.models - 0.5) * strheight("8", units = "user")
     wt.corr <- strwidth("-0.00", units = "user")
-    cex.corr <- min(c(0.75 / max(c(ht.corr, wt.corr)), 1.25))
+    cex.corr <- min(c(0.75 / max(c(ht.corr, wt.corr)), 1.5))
 
     vert <- (seq_len(n.models)) * 1.6
     vert <- vert - mean(vert) + 0.5
