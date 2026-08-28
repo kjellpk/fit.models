@@ -115,7 +115,7 @@ ellipsesPlot.covfm <- function(x, ...)
     on.exit(par(old.par))
 
     labels <- dimnames(vcov(x[[1]]))[[1]]
-    tl.margin <- max(strwidth(paste("WW", labels, sep = ""), units = "inches"))
+    tl.margin <- max(strwidth(paste0("W", labels), units = "inches"))
     tl.margin <- 1.05*tl.margin / par()$fin[1]
 
     if(tl.margin < 0.05) {
@@ -126,6 +126,12 @@ ellipsesPlot.covfm <- function(x, ...)
       tl.margin <- 0.2
     } else {
       cex.labels <- 1.0
+    }
+
+    if (!is.null(cex.lab <- dots$cex.lab)) {
+      cex.lab <- as.numeric(cex.lab)[[1L]]
+      cex.labels <- cex.lab * cex.labels
+      tl.margin <- cex.lab * tl.margin
     }
 
     br.margin <- 0.025*(n.models - 1)
