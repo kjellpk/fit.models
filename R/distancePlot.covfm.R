@@ -27,7 +27,7 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...) {
   n.models <- length(x)
   mod.names <- names(x)
 
-  dists <- lapply(x, function(u) u$dist)
+  dists <- lapply(x, function(u) as.matrix(u$dist))
   n <- lengths(dists)
   p <- vapply(x, function(u) length(u$center), -1L)
 
@@ -52,7 +52,7 @@ distancePlot.covfm <- function(x, level = 0.95, id.n = 3, ...) {
 
   mod <- factor(rep(mod.names, n), levels = mod.names)
 
-  indices <- unlist(lapply(dists, names), recursive = FALSE, use.names = FALSE)
+  indices <- unlist(lapply(dists, rownames), use.names = FALSE)
   if (!anyNA(dates <- as.Date(indices, optional = TRUE))) {
     indices <- dates
   } else {
